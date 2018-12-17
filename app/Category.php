@@ -17,8 +17,17 @@ class Category extends Model
 
     public function product_type() 
     {
-        return $this->hasMany('ProductType', 'id_category', 'id');
+        return $this->hasMany('App\ProductType', 'id_category', 'id');
     }
+
+    // public function getCategory($slug) 
+    // {
+    //     $category = Category::where('slug', $slug)->first();
+
+    //     return $category;
+    // }
+
+
 
     use Sluggable;
 

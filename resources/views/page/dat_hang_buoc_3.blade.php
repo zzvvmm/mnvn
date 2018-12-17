@@ -13,7 +13,6 @@
                     <a>&nbsp Điền thông tin khách hàng &nbsp<span><i class="fa fa-caret-right"> </i> </span></a>
                     <a>&nbsp Điền thông tin khách hàng &nbsp</a>
                 </div>
-                <hr>
                 <!-- BSTORE-BREADCRUMB END -->
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -31,11 +30,12 @@
                     </ul>									
                 </div>
             </div>
-            <br><br>
+            <br/> <br/> 
 
 			<center>
                 <h3>{{Session::get('thongbao')}}
-				    <p>Đặt hàng thành công! Vui lòng chờ trong ít phút,chúng tôi sẽ gọi điện ngay cho bạn xác nhận! vui lòng chú ý điện thoại! 
+				    <p>Đặt hàng thành công! Hãy kiểm tra email xác nhận mua hàng của chúng tôi trong hộp thư của bạn</p>
+                    <p>Vui lòng chờ trong ít phút,chúng tôi sẽ gọi điện ngay cho bạn xác nhận! vui lòng chú ý điện thoại!</p>
 				    <p>Hãy quay về <a href="{{ route('trang-chu') }}" style="color: #ff9933"><b>Trang chủ</b></a> để tiếp tục mua hàng!
                 </h3>
             </center>

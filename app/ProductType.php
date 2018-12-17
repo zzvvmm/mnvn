@@ -24,6 +24,13 @@ class ProductType extends Model
         return $this->belongsTo('App\Category', 'id_category', 'id');
     }
 
+    // public function getIdProductType($id_category) 
+    // {
+    //     $id_product_type = ProductType::where('id_category', $id_category)->pluck('id');
+
+    //     return $id_product_type;
+    // }
+
     use Sluggable;
 
     /**

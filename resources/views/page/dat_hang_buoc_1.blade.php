@@ -11,7 +11,6 @@
                     <span><i></i></span>
                     <a href="{{ route('dat-hang') }}">&nbsp Kiểm tra giỏ hàng &nbsp</a>
                 </div>
-                <hr>
                 <!-- BSTORE-BREADCRUMB END -->
             </div>
             @if( Session::has('cart') )
@@ -76,14 +75,8 @@
                                                     {{-- @endif --}}
                                                     <a>{{ $product['qty'] }}</a>
                                                     <a href="{{ route('them-gio-hang', $product['item']['id']) }}" title="Thêm 1 sản phẩm vào giỏ hàng"><i class="fa fa-plus"></i></a>
-                                                    {{-- <a>{{ $product['qty'] }}</a> --}}
                                                 </div>
                                             </td>
-                                            {{-- <td class="cart_quantity text-center">
-                                                <ul class="quanlity text-right">
-                                                    <li class="quanlity">{{ $product['qty'] }}</li>
-                                                </ul>
-                                            </td> --}}
                                             <td class="cart-delete text-center">
                                                 <span>
                                                     <a href="{{ route('xoa-gio-hang', $product['item']['id']) }}" class="cart_quantity_delete" title="Delete"><i class="fa fa-trash-o"></i></a>

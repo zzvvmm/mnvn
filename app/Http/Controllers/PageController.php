@@ -24,34 +24,18 @@ class PageController extends Controller
     {
         $category = Category::all();
         $type = ProductType::all();
-        $product = Product::all();
-        $qua_tang = Product::where([
-            ['id_type', '>=', 1],
-            ['id_type', '<=', 5]
-            ])->limit(6)->get();
-        
-        $tranh_dong = Product::where([
-            ['id_type', '>=', 20],
-            ['id_type', '<=', 26]
-            ])->limit(6)->get();
-
-        $do_tho_cung = Product::where([
-            ['id_type', '>=', 6],
-            ['id_type', '<=', 10]
-            ])->limit(6)->get();
-        
-        $do_phong_thuy = Product::where([
-            ['id_type', '>=', 27],
-            ['id_type', '<=', 31]
-            ])->limit(6)->get();
-
+        $qua_tang = Product::whereIn('id_type', [1,2,3,4,5])->limit(6)->get()->reverse();
+        $tranh_dong = Product::whereIn('id_type', [20,21,22,23,24,25,26])->limit(6)->get()->reverse();
+        $do_tho_cung = Product::whereIn('id_type', [6,7,8,9,10])->limit(6)->get()->reverse();
+        $do_phong_thuy = Product::whereIn('id_type', [27,28,29,30,31])->limit(6)->get()->reverse();
         $huy_hieu = Product::where('id_type', 37)->limit(6)->get();
         $ma_vang = Product::where('id_type', 38)->limit(6)->get();
         
-        return view('page.trangchu', compact('type', 'category', 'product', 'qua_tang', 'tranh_dong', 'do_tho_cung', 'do_phong_thuy', 'huy_hieu', 'ma_vang'));
+        return view('page.trangchu', compact('type', 'category', 'qua_tang', 'tranh_dong', 'do_tho_cung', 'do_phong_thuy', 'huy_hieu', 'ma_vang'));
     }
 
-    public function getAddToCart(Request $request, $id) {
+    public function getAddToCart(Request $request, $id) 
+    {
         $product = Product::find($id);
         $oldCart = Session('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -61,7 +45,8 @@ class PageController extends Controller
         return redirect()->back();
     }
 
-    public function postAddToCart(Request $request, $id) {
+    public function postAddToCart(Request $request, $id) 
+    {
         $product = Product::find($id);
         $oldCart = Session('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -71,7 +56,8 @@ class PageController extends Controller
         return redirect()->back();
     }
 
-    public function getDeleteItemCart($id) {
+    public function getDeleteItemCart($id) 
+    {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->removeItem($id);
@@ -106,21 +92,19 @@ class PageController extends Controller
         $id_type_khac = ProductType::where('id_category', '<>', $id)->pluck('id');
         $id_type = ProductType::where('id_category', $id)->pluck('id');
         $sp_danhmuc = Product::whereIn('id_type', $id_type )->paginate(12,['*'],'pag1');
-        $sp_khac = Product::whereIn('id_type', $id_type_khac)->limit(6)->get();
-        $type1 = ProductType::all();
+        $sp_khac = Product::whereIn('id_type', $id_type_khac)->limit(6)->get()->reverse();
 
-    	return view('page.danhmuc', compact('sp_danhmuc', 'sp_khac', 'category', 'type1'));
+    	return view('page.danhmuc', compact('sp_danhmuc', 'sp_khac', 'category'));
     }
 
     public function getProductType($slug) 
     {
         $category = Category::all();
         $id = ProductType::where('slug', $slug)->pluck('id');
-        $sp_theoloai = Product::where('id_type', $id)->paginate(8,['*'],'pag1');
+        $sp_theoloai = Product::where('id_type', $id)->paginate(8,['*'],'pag1') ;
         $sp_khac = Product::where('id_type', '<>', $id)->limit(8)->get();
         $loai_mau = ProductType::where('id', $id)->first();
         $cate = Category::where('id', $loai_mau->id_category)->first();
-        $type1 = ProductType::all();
 
     	return view('page.loai_sp', compact('sp_theoloai', 'sp_khac', 'category', 'type1', 'cate', 'loai_mau'));
     }
@@ -137,9 +121,8 @@ class PageController extends Controller
             ])->limit(16)->get();
         $type = ProductType::where('id', $id_type)->first();
         $cate = Category::where('id', $type->id_category)->first();
-        $sp_khac = Product::where('id', '<>', $id)->limit(5)->get();
-        $type1 = ProductType::all();
-
+        $sp_khac = Product::where('id', '<>', $id)->limit(5)->get()->reverse();
+            
     	return view('page.chi_tiet_sp', compact('sanpham', 'sp_khac', 'sp_cungloai', 'category', 'type', 'cate', 'type1'));
     }
 
@@ -160,7 +143,7 @@ class PageController extends Controller
         $customer->phone_number = $req->phone;
         $customer->note = $req->note;
         $customer->save();
-
+        
         $bill = new Bill;
         $bill->id_customer = $customer->id;
         $bill->date_order = date('Y-m-d');
@@ -177,13 +160,27 @@ class PageController extends Controller
             $billDetail->save();
         }
 
-        $data = array(
+        $data = array(  
             'bill' => $bill,
         );
+
+        // Mail::send('mail.bill', $data, function ($message) {
+        //     $message->from('tinhhang22@gmail.com', 'Thông báo có đơn hàng online mới');
+        //     $message->to('tinh.nc96@gmail.com')->subject('Thông báo có đơn hàng online mới!!');
+        // });
+
+        Mail::send('mail.bill_customer', $data, function ($message) {
+            $customer = Customer::all()->reverse()->first();
+            $message->from('tinhhang22@gmail.com', 'Thông báo có đơn hàng từ Mynghevietnam.vn');
+            $email = $customer->email;
+            $message->to($email)->subject('Thông báo có đơn hàng từ Mynghevietnam.vn !!');
+        });
+        
         Mail::send('mail.bill', $data, function ($message) {
             $message->from('tinhhang22@gmail.com', 'Thông báo có đơn hàng online mới');
             $message->to('tinh.nc96@gmail.com')->subject('Thông báo có đơn hàng online mới!!');
         });
+
         Session::forget('cart');
 
         return view('page.dat_hang_buoc_3')->with('thongbao', 'Đặt hàng thành công');
