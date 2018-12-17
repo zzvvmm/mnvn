@@ -25,7 +25,6 @@ class Product extends Model
         'unit',
         'avatar',
         'image'
-
     ];
 
     // protected $guarded = ['id'];
