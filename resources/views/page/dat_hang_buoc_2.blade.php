@@ -107,7 +107,7 @@
                                             <!-- SINGLE CART_ITEM START -->
                                             <tr>
                                                 <td class="cart-product">
-                                                    <a href="{{ route('chi-tiet-san-pham', $product['item']['slug']) }}"><img alt="image" src="source/img/product/$product['item']['avatar']"></a>
+                                                    <a href="{{ route('chi-tiet-san-pham', $product['item']['slug']) }}"><img alt="image" src="source/img/product/{{ $product['item']['avatar'] }}"></a>
                                                 </td>
                                                 <td class="cart-description">
                                                 <p class="product-name"><a href="{{ route('chi-tiet-san-pham', $product['item']['slug']) }}">{{ $product['item']['name'] }}</a></p>
