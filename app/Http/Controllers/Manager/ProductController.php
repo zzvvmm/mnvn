@@ -86,7 +86,7 @@ class ProductController extends Controller
             'unit' => $request->unit,
             'height' => $request->height,
             'color' => $request->color,
-            'guaratee' => $request->guarantee,
+            'guarantee' => $request->guarantee,
             'material' => $request->material,
             // 'avatar' => $request->avatar->getClientOriginalName(),
             
