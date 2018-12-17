@@ -21,13 +21,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         
-        view()->composer('header',function($view) {
+        view()->composer('header', function($view) {
             $loai_sanpham = ProductType::all();
 
             $view->with('loai_sp', $loai_sanpham);
         });
 
-        view()->composer(['header', 'page.dat_hang_buoc_1'], function($view) {
+        view()->composer(['header', 'page.dat_hang_buoc_1', 'page.dat_hang_buoc_2', 'mail.bill_customer'], function($view) {
             if (Session('cart')) {
                 $oldCart = Session::get('cart');
                 $cart = new Cart($oldCart);
@@ -36,13 +36,15 @@ class AppServiceProvider extends ServiceProvider
             }
         });
 
-        view()->composer('footer',function($view) {
+        view()->composer(['footer', 'navbar'], function($view) 
+        {
             $category = Category::all();
 
             $view->with('category', $category);
         });
 
-        view()->composer('footer',function($view) {
+        view()->composer(['footer', 'navbar'], function($view)
+        {
             $type = ProductType::all();
 
             $view->with('type', $type);

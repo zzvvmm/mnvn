@@ -23,9 +23,9 @@ Route::get('deleteOneCart/{id}', 'PageController@getDeleteOneItemCart')->name('x
 
 Route::get('danh-muc/{slug}', 'PageController@getCategory')->name('danh-muc');
 
-Route::get('loai-san-pham/{slug}', 'PageController@getProductType')->name('loai-san-pham');
+Route::get('danh-muc2/{slug}', 'PageController@getProductType')->name('loai-san-pham');
 
-Route::get('chi-tiet-san-pham/{slug}', 'PageController@getProductDetails')->name('chi-tiet-san-pham');
+Route::get('san-pham/{slug}', 'PageController@getProductDetails')->name('chi-tiet-san-pham');
 
 Route::get('dat-hang', 'PageController@getCheckout')->name('dat-hang');
 

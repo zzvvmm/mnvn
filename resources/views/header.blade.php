@@ -90,7 +90,7 @@
                                             <a><img src="source/img/product/{{ $product['item']['avatar'] }}" width="50px" height="50px" alt="shopping image" /></a>
                                             </div>
                                             <div class="shipping-item-text">
-                                            <span>{{$product['qty']}}<span class="pro-quan-x">x</span> <a class="pro-cat">{{ $product['item']['name'] }}</a></span>
+                                            <span>{{$product['qty']}}<span class="pro-quan-x">x</span> <a href="{{ route('chi-tiet-san-pham', $product['item']['slug']) }}" class="pro-cat">{{ $product['item']['name'] }}</a></span>
                                                 <p>{{ $product['item']['unit_price'] }}</p>
                                             </div>
                                         </div>

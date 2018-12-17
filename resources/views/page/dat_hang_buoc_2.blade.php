@@ -11,9 +11,7 @@
                     <span><i></i></span>
                     <a href="{{ route('dat-hang') }}">&nbsp Kiểm tra giỏ hàng &nbsp<span> <i class="fa fa-caret-right"> </i> </span></a>
                     <a>&nbsp Điền thông tin khách hàng &nbsp<span>
-                    
                 </div>
-                <hr>
                 <!-- BSTORE-BREADCRUMB END -->
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -36,7 +34,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <h2 class="page-title">Điền thông tin khách hàng</h2>
                         </div>	
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <!-- PERSONAL-INFOMATION START -->
                             <div class="personal-infomation">
                                 <form class="primari-box personal-info-box" id="personalinfo" method="post" action="#">
@@ -47,7 +45,7 @@
                                             <label for="firstname">Họ và tên <sup>*</sup></label>
                                             <input type="text" value="" name="name" id="name" class="form-control input-feild">
                                         </div>
-                                        <br>
+                                        <br/> 
                                         <div class="form-group primary-form-group p-info-group">
                                             <label>Giới tính<sup>*</sup></label>
                                             <span class="radio-box">
@@ -60,7 +58,7 @@
                                                 <label for="radio2">Nữ</label>
                                             </span>
                                         </div>
-                                        <br>
+                                        <br/> 
                                         <div class="form-group primary-form-group p-info-group">
                                             <label for="email">Email<sup>*</sup></label>
                                             <input type="email" value="" name="email" id="email" class="form-control input-feild">
@@ -80,12 +78,69 @@
                                             <input type="text" value="" name="note" id="note" class="form-control input-feild">
                                             <span class="min-pass"></span>
                                         </div>
-                                        <br>
-                                        <button type="submit" class="compare-button">Đặt hàng </button>
+                                        <br/> 
+                                        <button type="submit" class="compare-button">Tiến hành đặt hàng </button>
                                     </div>
                                 </form>							
                             </div>
                             <!-- PERSONAL-INFOMATION END -->
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <h3 class="box-subheading">Thông tin đơn hàng</h3>
+                            <br/>
+                            <div class="table-responsive">
+                                    <!-- TABLE START -->
+                                <table class="table table-bordered" id="cart-summary">
+                                    <!-- TABLE HEADER START -->
+                                    <thead>
+                                        <tr>
+                                            <th class="cart-product">Ảnh</th>
+                                            <th class="cart-description">Tên</th>
+                                            <th class="cart-unit text-right">Giá</th>
+                                            <th class="cart_quantity text-center">Số lượng</th>
+                                            <th class="cart-total text-right">Thành tiền</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach($product_cart as $product)
+                                    {{-- {{ dd($product)}} --}}
+                                        <tbody>	
+                                            <!-- SINGLE CART_ITEM START -->
+                                            <tr>
+                                                <td class="cart-product">
+                                                    <a href="{{ route('chi-tiet-san-pham', $product['item']['slug']) }}"><img alt="image" src="source/img/product/$product['item']['avatar']"></a>
+                                                </td>
+                                                <td class="cart-description">
+                                                <p class="product-name"><a href="{{ route('chi-tiet-san-pham', $product['item']['slug']) }}">{{ $product['item']['name'] }}</a></p>
+                                                </td>
+                                                <td class="cart-unit">
+                                                    <ul class="price text-right">
+                                                    <li class="price">{{ number_format($product['item']['price']) }} đồng</li>
+                                                    </ul>
+                                                </td>
+                                                <td class="cart_quantity text-center">
+                                                    {{-- <div class="cart-plus-minus-button"> --}}
+                                                        {{-- @if($product['qty']!=1) --}}
+                                                        {{-- @endif --}}
+                                                        <a>{{ $product['qty'] }}</a>
+                                                    </div>
+                                                </td>
+                                                <td class="cart-total">
+                                                    <span class="price">{{ number_format($product['price']) }} đồng</span>
+                                                </td>
+                                            </tr>    
+                                        </tbody>
+                                        @endforeach	
+                                        <tfoot>										
+                                            <tr class="cart-total-price">
+                                                <td class="cart_voucher" colspan="2" rowspan="0"></td>
+                                                <td class="text-right" colspan="2"><b>Tổng {{ Session('cart')->totalQty }} sản phẩm</b></td>
+                                                <td class="text-right" colspan="2">{{number_format(Session('cart')->totalPrice)}} đồng</td>
+                                            </tr>
+                                        </tfoot>
+                                    <!-- TABLE FOOTER END -->									
+                                </table>
+                                <!-- TABLE END -->
+                            </div>
                         </div>
                     </div>
                 </form>

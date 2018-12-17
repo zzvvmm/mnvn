@@ -17,156 +17,9 @@
                 <!-- BSTORE-BREADCRUMB END -->
             </div>
         </div>
-        <hr>
         <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                <div class="product-left-sidebar">
-                    <div class="left-category-menu">
-                        <div class="left-product-cat">
-                            <div class="category-heading">
-                                <h2>DANH MỤC SẢN PHẨM</h2>
-                            </div>
-                            <div class="category-menu-list">
-                                <ul>
-                                    <li>
-                                        <a href="{{ route('danh-muc', 'qua-tang-viet') }}"><span class="cat-thumb hidden-md hidden-sm hidden-xs"><img src="source/img/layout2/icon0.png" alt="" /></span>QUÀ TẶNG VIỆT<i class="fa fa-angle-right"></i></a>
-                                        <div class="cat-left-drop-menu">
-                                            <div class="left-mega col-xs-12">
-                                                @foreach($type1 as $value)
-                                                {{-- {{dd($type)}} --}}
-                                                    @if($value->id_category == 1)
-                                                        <a class="menu-item-heading" href="{{ route('loai-san-pham', $value->slug) }}">{{ $value->name }}</a>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('danh-muc', 'do-tho-cung') }}"><span class="cat-thumb hidden-md hidden-sm hidden-xs"><img src="source/img/layout2/icon0.png" alt="" /></span>ĐỒ THỜ CÚNG<i class="fa fa-angle-right"></i></a>
-                                        <div class="cat-left-drop-menu">
-                                            <div class="left-mega col-xs-12">
-                                                @foreach($type1 as $value)
-                                                    @if($value->id_category == 2)
-                                                        <a class="menu-item-heading" href="{{ route('loai-san-pham', $value->slug) }}">{{ $value->name }}</a>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('danh-muc', 'tuong-danh-nhan') }}"><span class="cat-thumb hidden-md hidden-sm hidden-xs"><img src="source/img/layout2/icon0.png" alt="" /></span>TƯỢNG DANH NHÂN<i class="fa fa-angle-right"></i></a>
-                                        <div class="cat-left-drop-menu">
-                                            <div class="left-mega col-xs-12">
-                                                @foreach($type1 as $value)
-                                                    @if($value->id_category == 3)
-                                                        <a class="menu-item-heading" href="{{ route('loai-san-pham', $value->slug) }}">{{ $value->name }}</a>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('danh-muc', 'tuong-phat') }}"><span class="cat-thumb hidden-md hidden-sm hidden-xs"><img src="source/img/layout2/icon0.png" alt="" /></span>TƯỢNG PHẬT<i class="fa fa-angle-right"></i></a>
-                                        <div class="cat-left-drop-menu">
-                                            <div class="left-mega col-xs-12">
-                                                @foreach($type1 as $value)
-                                                    @if($value->id_category == 4)
-                                                        <a class="menu-item-heading" href="{{ route('loai-san-pham', $value->slug) }}">{{ $value->name }}</a>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('danh-muc', 'tranh-dong') }}"><span class="cat-thumb hidden-md hidden-sm hidden-xs"><img src="source/img/layout2/icon0.png" alt="" /></span>TRANH ĐỒNG<i class="fa fa-angle-right"></i></a>
-                                        <div class="cat-left-drop-menu">
-                                            <div class="left-mega col-xs-12">
-                                                @foreach($type1 as $value)
-                                                    @if($value->id_category == 5)
-                                                        <a class="menu-item-heading" href="{{ route('loai-san-pham', $value->slug) }}">{{ $value->name }}</a>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('danh-muc', 'do-phong-thuy') }}"><span class="cat-thumb hidden-md hidden-sm hidden-xs"><img src="source/img/layout2/icon0.png" alt="" /></span>ĐỒ PHONG THỦY<i class="fa fa-angle-right"></i></a>
-                                        <div class="cat-left-drop-menu">
-                                            <div class="left-mega col-xs-12">
-                                                @foreach($type1 as $value)
-                                                    @if($value->id_category == 6)
-                                                        <a class="menu-item-heading" href="{{ route('loai-san-pham', $value->slug) }}">{{ $value->name }}</a>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('danh-muc', 'tuong-con-vat') }}"><span class="cat-thumb hidden-md hidden-sm hidden-xs"><img src="source/img/layout2/icon0.png" alt="" /></span>TƯỢNG CON VẬT <i class="fa fa-angle-right"></i></a>
-                                        <div class="cat-left-drop-menu">
-                                            <div class="left-mega col-xs-12">
-                                                @foreach($type1 as $value)
-                                                    @if($value->id_category == 7)
-                                                        <a class="menu-item-heading" href="{{ route('loai-san-pham', $value->slug) }}">{{ $value->name }}</a>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('danh-muc', 'huy-hieu-dong') }}"><span class="cat-thumb hidden-md hidden-sm hidden-xs"><img src="source/img/layout2/icon0.png" alt="" /></span>HUY HIỆU ĐỒNG <i class="fa fa-angle-right"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="single-left-sidebar sidebar-left-add">
-                    <div class="sidebar-left zoom-img">
-                        <a><img src="source/img/product/mau.jpg" alt="sidebar left" /></a>
-                    </div>	
-                </div>
-                <div class="single-left-sidebar sidebar-best-seller">
-                    <div class="left-title-area">
-                        <h2 class="left-title">Sản phẩm khác Tiêu Biểu</h2>
-                    </div>
-                    <div class="row">
-                        <div class="sidebar-best-seller-carousel">
-                            <div class="item">
-                                @foreach ($sp_khac as $khac)
-                                    <div class="single-product-item">
-                                    <div class="col-sm-6">
-                                        <div class="sidebar-product-image">
-                                            <a href="{{route('chi-tiet-san-pham', $khac->slug)}}">
-                                                <img src="/source/img/product/{{ $khac->getImage($khac->id)->name }}" />
-                                            </a> 
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">    
-                                        <div class="">
-                                            <a href="{{route('chi-tiet-san-pham', $khac->slug)}}">{{ $khac->name }}</a>
-                                            <div class="customar-comments-box">
-                                                <div class="rating-box">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </div>
-                                            <div class="price-box">
-                                                <span class="price">Giá:&nbsp{{ number_format($khac->price) }}&nbspVNĐ</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>	
-                    </div>
-                </div>
-            </div>
-            <br>
+            @include('navbar')
+            <br/>
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                 <!-- SINGLE-PRODUCT-DESCRIPTION START -->
                 <div class="row">
@@ -222,49 +75,25 @@
                                     <i class="fa fa-star"></i>
                                 </div>
                             </div>
-                            <br>
+                            <br/>
                             <div class="single-product-price">
                                 <h2>Giá : {{ number_format($sanpham->price) }} VNĐ</h2>
                             </div>
                             <div class="single-product-review-box">
                                 <p><b>Gồm :</b> {{ $sanpham->include }}</p>
-                                <br>
+                                <br/>
                                 <b>
                                     <p>Bảo hành : {{ $sanpham->guarantee }} tháng</p>
-                                    <br>
+                                    <br/>
                                     <p>Màu : {{ $sanpham->color }}</p>
                                 </b>
                             </div>
-                            {{-- ?\<form action="{{ route('them-gio-hang', $sanpham->id) }}" method="post" class="overlay-content-list"> --}}
-                                {{-- <input type="hidden" name="_token" value="{{csrf_token()}}"> --}}
-                                {{-- <b>Số lượng :<b>
-								<select fa fa-address-book name="qty">
-									<option value="1">1&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="7">8</option>
-                                </select> --}}
-                                <a href="{{ route('dat-hang' )}}" class="btn btn-danger" role="button">Mua ngay</a>
-                                {{-- <i class="button">Mua ngay</i> --}}
-                                {{-- <button type="submit" class="compare-button">
-                                    <i>Mua ngay</i>
-                                </button> --}}
-                                {{-- <button type="submit" class="compare-button">
-                                    <i>Thêm vào giỏ hàng</i>
-                                </button> --}}
+                                {{-- <a href="{{ route('dat-hang')}}" class="btn btn-danger" role="button">Mua ngay</a> --}}
                                 <a href="{{ route('them-gio-hang', $sanpham->id) }}" class="btn btn-warning" role="button">Thêm vào giỏ hàng</a>
-                                {{-- <button type="submit" class="btn btn-info">Thêm vào giỏ hàng</button> --}}
 								<div class="clearfix"></div>
-							{{-- </form> --}}
                         </div>
                     </div>
                 </div>
-                <!-- SINGLE-PRODUCT-DESCRIPTION END -->
-                <!-- SINGLE-PRODUCT INFO TAB START -->
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="product-more-info-tab">
