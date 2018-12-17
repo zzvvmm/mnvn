@@ -18,7 +18,7 @@
     {{ Html::style('assets/demo-bower/assets/css/animate.min.css') }}
     {{ Html::style('assets/demo-bower/assets/css/app.css') }}
     {{-- {{ Html::style('css/mystyle.css') }} --}}
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-notifications.min.css">
+    {{-- <link rel="stylesheet" type="text/css" href="/css/bootstrap-notifications.min.css"> --}}
 </head>
 
 <body>
@@ -39,7 +39,7 @@
     {{ Html::script('assets/demo-bower/assets/vendor/jquery.sparkline/jquery.sparkline.min.js') }}
     {{-- {{ Html::script('assets/demo-bower/assets/js/dashboard/bank.js') }} --}}
     {{ Html::script('assets/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') }}
-    {{-- {{ Html::script('assets/pusher-js/dist/web/pusher.min.js') }} --}}
+    {{ Html::script('assets/pusher-js/dist/web/pusher.min.js') }}   
     <script type="text/javascript">
         $(document).ready(function () {
             @if (Session::has('success'))
@@ -166,14 +166,14 @@
             });
         }
     </script> --}}
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    {{-- <script src="{{ asset('ckeditor/ckeditor.js') }}"></script> --}}
     <script> CKEDITOR.replace('editor1', {
         filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
-        filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
-        filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
-        filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
-        filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
-        filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+        // filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+        // filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+        // filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+        // filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+        // filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
     } );
     </script>
     @yield('script')

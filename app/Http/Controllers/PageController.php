@@ -22,8 +22,6 @@ class PageController extends Controller
 {
     public function getIndex()
     {
-        $category = Category::all();
-        $type = ProductType::all();
         $qua_tang = Product::whereIn('id_type', [1,2,3,4,5])->limit(6)->get()->reverse();
         $tranh_dong = Product::whereIn('id_type', [20,21,22,23,24,25,26])->limit(6)->get()->reverse();
         $do_tho_cung = Product::whereIn('id_type', [6,7,8,9,10])->limit(6)->get()->reverse();
@@ -99,7 +97,6 @@ class PageController extends Controller
 
     public function getProductType($slug) 
     {
-        $category = Category::all();
         $id = ProductType::where('slug', $slug)->pluck('id');
         $sp_theoloai = Product::where('id_type', $id)->paginate(8,['*'],'pag1') ;
         $sp_khac = Product::where('id_type', '<>', $id)->limit(8)->get();
@@ -111,7 +108,6 @@ class PageController extends Controller
 
     public function getProductDetails($slug) 
     {
-        $category = Category::all();
         $sanpham = Product::where('slug', $slug)->first();
         $id = Product::where('slug', $slug)->pluck('id');
         $id_type = $sanpham->id_type;
@@ -175,7 +171,7 @@ class PageController extends Controller
             $email = $customer->email;
             $message->to($email)->subject('Thông báo có đơn hàng từ Mynghevietnam.vn !!');
         });
-        
+
         Mail::send('mail.bill', $data, function ($message) {
             $message->from('tinhhang22@gmail.com', 'Thông báo có đơn hàng online mới');
             $message->to('tinh.nc96@gmail.com')->subject('Thông báo có đơn hàng online mới!!');

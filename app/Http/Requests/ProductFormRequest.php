@@ -26,7 +26,6 @@ class ProductFormRequest extends FormRequest
         return [
             'name' => 'required',
             'id_type' => 'required',
-            'avatar' => 'required|max:2048',
             'image' => 'required|max:2048',
         ];
     }
@@ -35,7 +34,6 @@ class ProductFormRequest extends FormRequest
         return [
             'name.required' => 'Vui lòng nhập Tên sản phẩm',
             'id_type.required' => 'Vui lòng nhập loại sản phẩm',
-            'avatar.max'  => 'Kích thước file quá lớn',
             'image.max'  => 'Kích thước file quá lớn',
         ];
     }

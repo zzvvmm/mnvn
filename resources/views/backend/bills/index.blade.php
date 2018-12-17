@@ -18,9 +18,6 @@
                     </div> 
                 </div>
                 <div class="col-md-4">
-                    <!-- <div class="creat_button text-right button_create">
-                        {{-- <a href="{{ route('bills.create') }}" class="btn btn-success">{{ __('Creat Bills') }}</a> --}}
-                    </div>  -->
                 </div>
             </div>
             <div class="card">

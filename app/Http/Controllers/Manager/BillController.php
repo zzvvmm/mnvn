@@ -17,7 +17,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        $bill = Bill::all();
+        $bill = Bill::all()->reverse();
         $bill_detail = BillDetail::all();
         $customer = Customer::all();
 
