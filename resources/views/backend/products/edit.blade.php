@@ -44,51 +44,72 @@
 
                                 <div class="row m-t-30">
                                     <div class="col-md-2"></div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-4">
                                         <div class="p-h-10">
                                             <div class="form-group">
-                                                {{ Form::label(__('Loại sản phẩm (*)'), null, ['class' => 'control-label']) }}
-                                                {{ Form::text('id_type', null, ['class' => 'form-control', 'value' => $product->id_type]) }}
+                                                <label class="control-label">Danh mục (*)</label>
+                                                <select class="form-control" name="category" id="category">
+                                                    @foreach($category as $cate)
+                                                        <option value="{{ $cate->id }}">{{ $cate->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div class="row m-t-30">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-4">
                                         <div class="p-h-10">
                                             <div class="form-group">
-                                                {{ Form::label(__('Giá (*)'), null, ['class' => 'control-label']) }}
+                                                <label class="control-label">Loại sản phẩm (*)</label>
+                                                <select class="form-control" name="id_type" id="id_type">
+                                                    @foreach($product_type as $id_type)
+                                                        <option value="{{ $id_type->id }}">{{ $id_type->name }}</option>
+                                                    @endforeach
+                                                </select>
+
+                                                {{-- {{ Form::label(__('Loại'), null, ['class' => 'control-label']) }}
                                                 <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">{{ __('VND') }}</span>
-                                                    </div>
-                                                    {{ Form::text('price', null, ['class' => 'form-control', 'value' => $product->price]) }}
+                                                    {{ Form::text('id_type', null, ['class' => 'form-control']) }}
                                                     <div class="input-group-append">
-                                                        <span class="input-group-text">{{ __('00') }}</span>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-2"></div>  
-                                </div> 
-                                <div class="row m-t-30">
+                                </div>
+
+                                {{-- <div class="row m-t-30">
                                     <div class="col-md-2"></div>
                                     <div class="col-md-8">
                                         <div class="p-h-10">
                                             <div class="form-group">
-                                                {{ Form::label(__('Bảo hành(tháng)'), null, ['class' => 'control-label']) }}
-                                                {{ Form::text('guarantee', null, ['class' => 'form-control', 'value' => $product->guarantee]) }}
+                                                {{ Form::label(__('Loại sản phẩm (*)'), null, ['class' => 'control-label']) }}
+                                                {{ Form::text('id_type', null, ['class' => 'form-control', '
+                                                ' => $product->id_type]) }}
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-2"></div>
-                                </div>
+                                </div> --}}
                                 <div class="row m-t-30">
                                     <div class="col-md-2"></div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-2">
+                                        <div class="p-h-10">
+                                            <div class="form-group">
+                                                {{ Form::label(__('Giá (*)'), null, ['class' => 'control-label']) }}
+                                                {{ Form::text('price', null, ['class' => 'form-control', 'value' => $product->price]) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="p-h-10">
+                                            <div class="form-group">
+                                                {{ Form::label(__('Bảo hành (tháng)'), null, ['class' => 'control-label']) }}
+                                                {{ Form::text('guarantee', null, ['class' => 'form-control', 'value' => $product->guarantee]) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
                                         <div class="p-h-10">
                                             <div class="form-group">
                                                 {{ Form::label(__('Số lượng còn lại'), null, ['class' => 'control-label']) }}
@@ -96,11 +117,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div class="row m-t-30">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-2">
                                         <div class="p-h-10">
                                             <div class="form-group">
                                                 {{ Form::label(__('Chiều cao(cm)'), null, ['class' => 'control-label']) }}
@@ -108,11 +125,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2"></div>
-                                </div>
+                                    <div class="col-md-2"></div>  
+                                </div> 
                                 <div class="row m-t-30">
                                     <div class="col-md-2"></div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-2">
                                         <div class="p-h-10">
                                             <div class="form-group">
                                                 {{ Form::label(__('Cân nặng(kg)'), null, ['class' => 'control-label']) }}
@@ -120,11 +137,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div class="row m-t-30">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-2">
                                         <div class="p-h-10">
                                             <div class="form-group">
                                                 {{ Form::label(__('Màu'), null, ['class' => 'control-label']) }}
@@ -132,11 +145,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div class="row m-t-30">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-2">
                                         <div class="p-h-10">
                                             <div class="form-group">
                                                 {{ Form::label(__('Chất liệu'), null, ['class' => 'control-label']) }}
@@ -144,19 +153,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2"></div>
-                                </div>
-                                <div class="row m-t-30">
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-2">
                                         <div class="p-h-10">
                                             <div class="form-group">
                                                 {{ Form::label(__('Bao gồm'), null, ['class' => 'control-label']) }}
-                                                {{ Form::textarea('include', $product->include, ['class' => 'form-control']) }}
+                                                {{ Form::text('include', null, ['class' => 'form-control', 'value' => $product->include]) }}
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2"></div>  
+                                    <div class="col-md-2"></div>
                                 </div>
                                 <div class="row m-t-30">
                                     <div class="col-md-2"></div>
@@ -191,4 +196,25 @@
 {{ Html::script('assets/demo-bower/assets/vendor/selectize/dist/js/standalone/selectize.min.js') }}
 {{ Html::script('assets/demo-bower/assets/vendor/summernote/dist/summernote-bs4.min.js') }}
 {{ Html::script('assets/demo-bower/assets/js/forms/form-elements.js') }}
+<script>
+    $(document).ready(function(){
+        $("#category").change(function(){
+            var idcategory = $(this).val();
+            // alert(idcategory);
+            $.ajax({
+                method: 'POST', // Type of response and matches what we said in the route
+                url: '/manager/ajax/product_type/'+idcategory, // This is the url we gave in the route
+                // data: {'idcategory' : idcategory}, // a JSON object to send back
+                success: function(response){ // What to do if we succeed
+                    console.log(response);
+                    $("#id_type").html(response); 
+                },
+                error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
+        });
+    }); 
+</script>
 @endsection
