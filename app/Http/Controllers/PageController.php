@@ -22,14 +22,12 @@ class PageController extends Controller
 {
     public function getIndex()
     {
-        $category = Category::all();
-        $type = ProductType::all();
-        $qua_tang = Product::whereIn('id_type', [1,2,3,4,5])->limit(6)->get()->reverse();
-        $tranh_dong = Product::whereIn('id_type', [20,21,22,23,24,25,26])->limit(6)->get()->reverse();
-        $do_tho_cung = Product::whereIn('id_type', [6,7,8,9,10])->limit(6)->get()->reverse();
-        $do_phong_thuy = Product::whereIn('id_type', [27,28,29,30,31])->limit(6)->get()->reverse();
-        $huy_hieu = Product::where('id_type', 37)->limit(6)->get();
-        $ma_vang = Product::where('id_type', 38)->limit(6)->get();
+        $qua_tang = Product::whereIn('id_type', [1,2,3,4,5])->get()->reverse();
+        $tranh_dong = Product::whereIn('id_type', [20,21,22,23,24,25,26])->get()->reverse();
+        $do_tho_cung = Product::whereIn('id_type', [6,7,8,9,10])->get()->reverse();
+        $do_phong_thuy = Product::whereIn('id_type', [27,28,29,30,31])->get()->reverse();
+        $huy_hieu = Product::where('id_type', 37)->get();
+        $ma_vang = Product::where('id_type', 38)->get();
         
         return view('page.trangchu', compact('type', 'category', 'qua_tang', 'tranh_dong', 'do_tho_cung', 'do_phong_thuy', 'huy_hieu', 'ma_vang'));
     }
@@ -91,17 +89,16 @@ class PageController extends Controller
         $type_khac = ProductType::where('id_category', '<>', $id)->get();
         $id_type_khac = ProductType::where('id_category', '<>', $id)->pluck('id');
         $id_type = ProductType::where('id_category', $id)->pluck('id');
-        $sp_danhmuc = Product::whereIn('id_type', $id_type )->paginate(12,['*'],'pag1');
-        $sp_khac = Product::whereIn('id_type', $id_type_khac)->limit(6)->get()->reverse();
+        $sp_danhmuc = Product::whereIn('id_type', $id_type )->paginate(18,['*'],'pag1');
+        $sp_khac = Product::whereIn('id_type', $id_type_khac)->limit(10)->get()->reverse();
 
     	return view('page.danhmuc', compact('sp_danhmuc', 'sp_khac', 'category'));
     }
 
     public function getProductType($slug) 
     {
-        $category = Category::all();
         $id = ProductType::where('slug', $slug)->pluck('id');
-        $sp_theoloai = Product::where('id_type', $id)->paginate(8,['*'],'pag1') ;
+        $sp_theoloai = Product::where('id_type', $id)->paginate(18,['*'],'pag1') ;
         $sp_khac = Product::where('id_type', '<>', $id)->limit(8)->get();
         $loai_mau = ProductType::where('id', $id)->first();
         $cate = Category::where('id', $loai_mau->id_category)->first();
@@ -111,7 +108,6 @@ class PageController extends Controller
 
     public function getProductDetails($slug) 
     {
-        $category = Category::all();
         $sanpham = Product::where('slug', $slug)->first();
         $id = Product::where('slug', $slug)->pluck('id');
         $id_type = $sanpham->id_type;
@@ -175,7 +171,7 @@ class PageController extends Controller
             $email = $customer->email;
             $message->to($email)->subject('Thông báo có đơn hàng từ Mynghevietnam.vn !!');
         });
-        
+
         Mail::send('mail.bill', $data, function ($message) {
             $message->from('tinhhang22@gmail.com', 'Thông báo có đơn hàng online mới');
             $message->to('tinh.nc96@gmail.com')->subject('Thông báo có đơn hàng online mới!!');

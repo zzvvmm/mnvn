@@ -18,9 +18,6 @@
                     </div> 
                 </div>
                 <div class="col-md-4">
-                    <!-- <div class="creat_button text-right button_create">
-                        {{-- <a href="{{ route('bills.create') }}" class="btn btn-success">{{ __('Creat Bills') }}</a> --}}
-                    </div>  -->
                 </div>
             </div>
             <div class="card">
@@ -29,7 +26,7 @@
                         <table id="dt-opt" class="table table-hover table-xl">
                             <thead>
                                 <tr>
-                                    <th>{{ __('ID') }}</th>
+                                    {{-- <th>{{ __('ID') }}</th> --}}
                                     <th>{{ __('Email khách hàng') }}</th>
                                     <th>{{ __('Ngày đặt mua') }}</th>
                                     <th>{{ __('Tổng hóa đơn') }}</th>
@@ -50,7 +47,7 @@
                             <tbody> 
                                 @foreach($bill as $value)
                                     <tr>
-                                        <td>{{ $value->id }}</td>
+                                        {{-- <td>{{ $value->id }}</td> --}}
                                         <td>{{ $value->customer->email }}</td>
                                         <td>{{ $value->date_order }}</td>
                                         <td>{{ $value->total }}</td>

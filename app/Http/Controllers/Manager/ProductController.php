@@ -20,7 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
+        $product = Product::all()->reverse();
         $product_type = ProductType::all();
         
         return view('backend.products.index', compact('product', 'product_type'));

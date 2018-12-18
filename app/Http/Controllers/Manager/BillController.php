@@ -17,7 +17,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        $bill = Bill::all();
+        $bill = Bill::all()->reverse();
         $bill_detail = BillDetail::all();
         $customer = Customer::all();
 
@@ -32,9 +32,9 @@ class BillController extends Controller
      */
     public function show($id)
     {
-        $bill = Bill::findOrFail($id);
-        $bill_detail = BillDetail::findOrFail($id);
-        $customer = Customer::findOrFail($id);
+        $bill = Bill::where('id', $id);
+        // $bill_detail = BillDetail::findOrFail($id);
+        // $customer = Customer::findOrFail($id);
 
         return view('backend.bills.show', compact('bill', 'bill_detail', 'customer'));
     }
@@ -47,9 +47,9 @@ class BillController extends Controller
      */
     public function edit($id)
     {
-        $bill = Bill::findOrFail($id);
-        $bill_detail = BillDetail::findOrFail($id);
-        $customer = Customer::findOrFail($id);
+        $bill = Bill::where('id', $id);
+        // $bill_detail = BillDetail::findOrFail($id);
+        // $customer = Customer::findOrFail($id);
 
         return view('backend.bills.edit', compact('bill', 'bill_detail', 'customer'));
 
@@ -64,7 +64,7 @@ class BillController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $bill = Bill::findOrFail($id);
+        $bill = Bill::where('id', $id);;
         $bill->status = $request->status;
         $bill->save();
 
@@ -80,7 +80,7 @@ class BillController extends Controller
      */
     public function destroy($id)
     {
-        $bill = Bill::findOrFail($id);
+        $bill = Bill::where('id', $id);
         $bill->delete();
 
         return redirect()->back()->with('success', __('delete_success'));
