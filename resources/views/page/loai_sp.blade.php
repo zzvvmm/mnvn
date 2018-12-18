@@ -48,7 +48,7 @@
                         <ul class="gategory-product">
                             @foreach($sp_theoloai as $sp)
                             <!-- SINGLE ITEM START -->
-                                <li class="gategory-product-list col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                <li class="gategory-product-list col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <div class="single-product-item">
                                         <div class="product-image">
                                         <a href="{{ route('chi-tiet-san-pham', $sp->slug) }}"><img src="source/img/product/{{ $sp->getImage($sp->id)->name }}" alt="product-image" /></a>

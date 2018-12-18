@@ -26,7 +26,7 @@
                         <table id="dt-opt" class="table table-hover table-xl">
                             <thead>
                                 <tr>
-                                    <th>{{ __('ID') }}</th>
+                                    {{-- <th>{{ __('ID') }}</th> --}}
                                     <th>{{ __('Email khách hàng') }}</th>
                                     <th>{{ __('Ngày đặt mua') }}</th>
                                     <th>{{ __('Tổng hóa đơn') }}</th>
@@ -47,7 +47,7 @@
                             <tbody> 
                                 @foreach($bill as $value)
                                     <tr>
-                                        <td>{{ $value->id }}</td>
+                                        {{-- <td>{{ $value->id }}</td> --}}
                                         <td>{{ $value->customer->email }}</td>
                                         <td>{{ $value->date_order }}</td>
                                         <td>{{ $value->total }}</td>

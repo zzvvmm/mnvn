@@ -29,7 +29,7 @@
                         <table id="dt-opt" class="table table-hover table-xl">
                             <thead>
                                 <tr>
-                                    <th>{{ __('ID') }}</th>
+                                    {{-- <th>{{ __('ID') }}</th> --}}
                                     <th>{{ __('Ảnh') }}</th>
                                     <th>{{ __('Danh mục') }}</th>
                                     {{-- <th>{{ __('Loại sản phẩm') }}</th> --}}
@@ -37,7 +37,7 @@
                                     <th>{{ __('Giá') }}</th>
                                     {{-- <th>{{ __('Bảo hành') }}</th>s --}}
                                     <th>{{ __('Số lượng') }}</th>
-                                    {{-- <th>{{ __('Xem - Sửa - Xóa') }}</th> --}}
+                                    <th></th>
                                 </tr>
                             </thead>
                             @if ($errors->has('name'))
@@ -52,7 +52,7 @@
                             <tbody> 
                                 @foreach($product as $value)
                                     <tr>
-                                        <td>{{ $value->id }}</td>
+                                        {{-- <td>{{ $value->id }}</td> --}}
                                         <td><img src={{ asset('source/img/product/'. $value->avatar ) }} width="50px" height="50px"></td>
                                         <td><p>{{ $value->product_type->category->name }}</p><p>-><i>{{ $value->product_type->name }}</i></p></td>
                                         {{-- <td>{{ $value->product_type->name }}</td> --}}
@@ -61,7 +61,6 @@
                                         {{-- <td>{{ $value->guarantee }} tháng</td> --}}
                                         <td>{{ $value->unit }}</td>
                                         <td class="font-size-18 text-center">
-                                            <a href="{{ route('products.show', $value->id) }}" class="text-gray m-r-15"><i class="fa fa-file"></i></a>
                                             <a href="{{ route('products.edit', $value->id) }}" class="text-gray m-r-15"><i class="ti-pencil"></i></a>
                                             <a data-toggle="modal" data-target="#basic-modal" data-url="{{ route('products.destroy', $value->id) }}" class="text-gray m-r-15"><i class="ti-trash"></i></a>
                                         </td>
