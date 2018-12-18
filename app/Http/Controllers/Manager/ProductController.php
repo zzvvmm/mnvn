@@ -125,9 +125,11 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::where('id', $id)->first();
+        $product_type = ProductType::all();
+        $category = Category::all();
         // $image = Image::where('id_product', $id)->get();
 
-        return view('backend.products.edit', compact('product', 'product_type'));
+        return view('backend.products.edit', compact('product', 'product_type', 'category'));
     }
 
     /**
