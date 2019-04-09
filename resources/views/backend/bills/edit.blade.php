@@ -37,7 +37,7 @@
                                             <div class="form-group">
                                                 {{ Form::label(__('Status'), null, ['class' => 'col-lg-2 control-label']) }}
                                                 <div class="col-lg-12">
-                                                    {{ Form::select('status', ['0' => __('Watting Accept'), '1' => __('Accepted')], null, ['class' => 'form-control']) }}  
+                                                    {{ Form::select('status', ['0' => __('Chưa đồng ý'), '1' => __('Đồng ý')], null, ['class' => 'form-control']) }}  
                                                 </div>
                                             </div>
                                         </div>

@@ -32,9 +32,10 @@ class BillController extends Controller
      */
     public function show($id)
     {
-        $bill = Bill::where('id', $id);
-        // $bill_detail = BillDetail::findOrFail($id);
-        // $customer = Customer::findOrFail($id);
+        $bill = Bill::where('id', $id)->first();
+        // $id_customer = Customer::where('id', $bill->id_customer);
+        $bill_detail = BillDetail::where('id_bill', $id);
+        $customer = Customer::where('id', $bill->id_customer);
 
         return view('backend.bills.show', compact('bill', 'bill_detail', 'customer'));
     }
@@ -47,7 +48,9 @@ class BillController extends Controller
      */
     public function edit($id)
     {
-        $bill = Bill::where('id', $id);
+        $bill = Bill::where('id', $id)->first();
+        $bill_detail = BillDetail::where('id_bill', $id);
+        $customer = Customer::where('id', $bill->id_customer);
         // $bill_detail = BillDetail::findOrFail($id);
         // $customer = Customer::findOrFail($id);
 
@@ -64,7 +67,9 @@ class BillController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $bill = Bill::where('id', $id);;
+        $bill = Bill::where('id', $id)->first();
+        $bill_detail = BillDetail::where('id_bill', $id);
+        $customer = Customer::where('id', $bill->id_customer);
         $bill->status = $request->status;
         $bill->save();
 
@@ -80,7 +85,7 @@ class BillController extends Controller
      */
     public function destroy($id)
     {
-        $bill = Bill::where('id', $id);
+        $bill = Bill::where('id', $id)->first();
         $bill->delete();
 
         return redirect()->back()->with('success', __('delete_success'));

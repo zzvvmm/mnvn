@@ -27,8 +27,9 @@ class ImageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        // dd($request);
         // $product_type = ProductType::all();
 
         return view('backend.images.create', compact('product_type'));
@@ -57,4 +58,31 @@ class ImageController extends Controller
 
         return redirect()->route('products.index')->with('success', __('Tạo thành công'));
     }
+    // function postImages(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         if ($request->hasFile('file')) {
+    //             $imageFiles = $request->file('file');
+    //             // set destination path
+    //             $folderDir = 'source/img/product';
+    //             $destinationPath = base_path() . '/' . $folderDir;
+    //             // this form uploads multiple files
+    //             foreach ($request->file('file') as $fileKey => $fileObject) {
+    //                 // make sure each file is valid
+    //                 if ($fileObject->isValid()) {
+    //                     // make destination file name
+    //                     $destinationFileName = time() . $fileObject->getClientOriginalName();
+    //                     // move the file from tmp to the destination path
+    //                     $fileObject->move($destinationPath, $destinationFileName);
+    //                     // save the the destination filename
+    //                     $prodcuctImage = new Image;
+    //                     $ProdcuctImage->image_path = $folderDir . $destinationFileName;
+    //                     $prodcuctImage->title = $originalNameWithoutExt;
+    //                     $prodcuctImage->alt = $originalNameWithoutExt;
+    //                     $prodcuctImage->save();
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }

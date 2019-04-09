@@ -113,7 +113,7 @@ class ProductController extends Controller
         $product->avatar = $product->getImage($product->id)->name;
         $product->save();
 
-        return redirect()->route('products.index') ->with('success', __('Tạo thành công'));
+        return redirect()->route('products.index')->with('success', __('Tạo thành công'));
     }
 
         /**
@@ -127,7 +127,6 @@ class ProductController extends Controller
         $product = Product::where('id', $id)->first();
         $product_type = ProductType::all();
         $category = Category::all();
-        // $image = Image::where('id_product', $id)->get();
 
         return view('backend.products.edit', compact('product', 'product_type', 'category'));
     }

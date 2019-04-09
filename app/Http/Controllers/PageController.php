@@ -29,7 +29,7 @@ class PageController extends Controller
         $huy_hieu = Product::where('id_type', 37)->get();
         $ma_vang = Product::where('id_type', 38)->get();
         
-        return view('page.trangchu', compact('type', 'category', 'qua_tang', 'tranh_dong', 'do_tho_cung', 'do_phong_thuy', 'huy_hieu', 'ma_vang'));
+        return view('page.trangchu', compact( 'qua_tang', 'tranh_dong', 'do_tho_cung', 'do_phong_thuy', 'huy_hieu', 'ma_vang'));
     }
 
     public function getAddToCart(Request $request, $id) 
@@ -103,7 +103,7 @@ class PageController extends Controller
         $loai_mau = ProductType::where('id', $id)->first();
         $cate = Category::where('id', $loai_mau->id_category)->first();
 
-    	return view('page.loai_sp', compact('sp_theoloai', 'sp_khac', 'category', 'type1', 'cate', 'loai_mau'));
+    	return view('page.loai_sp', compact('sp_theoloai', 'sp_khac', 'cate', 'loai_mau'));
     }
 
     public function getProductDetails($slug) 
@@ -119,7 +119,7 @@ class PageController extends Controller
         $cate = Category::where('id', $type->id_category)->first();
         $sp_khac = Product::where('id', '<>', $id)->limit(5)->get()->reverse();
             
-    	return view('page.chi_tiet_sp', compact('sanpham', 'sp_khac', 'sp_cungloai', 'category', 'type', 'cate', 'type1'));
+    	return view('page.chi_tiet_sp', compact('sanpham', 'sp_khac', 'sp_cungloai', 'type', 'cate'));
     }
 
     public function getCheckout() 
@@ -165,17 +165,17 @@ class PageController extends Controller
         //     $message->to('tinh.nc96@gmail.com')->subject('Thông báo có đơn hàng online mới!!');
         // });
 
-        Mail::send('mail.bill_customer', $data, function ($message) {
-            $customer = Customer::all()->reverse()->first();
-            $message->from('tinhhang22@gmail.com', 'Thông báo có đơn hàng từ Mynghevietnam.vn');
-            $email = $customer->email;
-            $message->to($email)->subject('Thông báo có đơn hàng từ Mynghevietnam.vn !!');
-        });
+        // Mail::send('mail.bill_customer', $data, function ($message) {
+        //     $customer = Customer::all()->reverse()->first();
+        //     $message->from('tinhhang22@gmail.com', 'Thông báo có đơn hàng từ Mynghevietnam.vn');
+        //     $email = $customer->email;
+        //     $message->to($email)->subject('Thông báo có đơn hàng từ Mynghevietnam.vn !!');
+        // });
 
-        Mail::send('mail.bill', $data, function ($message) {
-            $message->from('tinhhang22@gmail.com', 'Thông báo có đơn hàng online mới');
-            $message->to('tinh.nc96@gmail.com')->subject('Thông báo có đơn hàng online mới!!');
-        });
+        // Mail::send('mail.bill', $data, function ($message) {
+        //     $message->from('tinhhang22@gmail.com', 'Thông báo có đơn hàng online mới');
+        //     $message->to('tinh.nc96@gmail.com')->subject('Thông báo có đơn hàng online mới!!');
+        // });
 
         Session::forget('cart');
 

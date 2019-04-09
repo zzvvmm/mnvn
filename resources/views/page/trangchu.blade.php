@@ -296,7 +296,7 @@
                                                 <ul>
                                                     <li><a class="fancybox" href="source/img/product/{{ $pt->getImage($pt->id)->name }}" title="Zoom ảnh"><i class="fa fa-search-plus"></i></a></li>
                                                     <li><a href="{{ route('them-gio-hang', $pt->id) }}" title="Thêm vào giỏ hàng"><i class="fa fa-shopping-cart"></i></a></li>
-                                                    <li><a href="{{ route('chi-tiet-san-pham', $dt->slug) }}" title="Xem chi tiết"><i class="fa fa-search"></i></a></li>
+                                                    <li><a href="{{ route('chi-tiet-san-pham', $pt->slug) }}" title="Xem chi tiết"><i class="fa fa-search"></i></a></li>
                                                     <li><a  href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::fullUrl()) }}" target="_blank" title="Chia sẻ lên Facebook"> <i class="fa fa-share"></i></a></li>
                                                 </ul>
                                             </div>

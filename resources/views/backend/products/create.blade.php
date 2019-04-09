@@ -3,6 +3,7 @@
 @section('style')
 {!! Html::style('assets/demo-bower/assets/vendor/selectize/dist/css/selectize.default.css') !!} 
 {!! Html::style('assets/demo-bower/assets/vendor/summernote/dist/summernote-bs4.css') !!} 
+{!! Html::style('dist/css/dropzone.css') !!} 
 @endsection
 @section('content')
 <div class="page-container">
@@ -416,7 +417,21 @@
                                     </div>
                                     <div class="col-md-2"></div>  
                                 </div> --}}
-
+                                {{-- <div class="row m-t-30">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <div class="dropzone" id="my-dropzone" name="myDropzone">
+                        
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <button type="submit" class="btn btn-success pull-right">
+                                            <i class="fa fa-save"></i>
+                                            <span>Save and back</span>
+                                        </button>
+                                    </div>
+                                </div> --}}
+                                
                                 <div class="row m-t-30">
                                     <div class="col-md-2"></div>
                                     <div class="col-md-8">
@@ -439,7 +454,7 @@
                                     </div>
                                     <div class="col-md-2"></div>  
                                 </div>
-                                <div class="row m-t-30">
+                                {{-- <div class="row m-t-30">
                                     <div class="col-md-2"></div>
                                     <div class="col-md-8">
                                         <div class="p-h-10">
@@ -472,7 +487,35 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2"></div>  
-                                </div>
+                                </div> --}}
+                                {{-- <div class="col-md-6">
+                                    <div class="box">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">SEO Infomation</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="form-group col-md-12">
+                                                SEO Title <input type="text" name="meta_title" class="form-control"  value="{{ old('meta_title') }}">
+                                                Meta Keywords <input type="text" name="meta_key" class="form-control"  value="{{ old('meta_key') }}">
+                                                Meta Description <input type="text" name="meta_desc" class="form-control"  value="{{ old('meta_desc') }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> --}}
+                                {{-- <div class="row m-t-30">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8">
+                                        <div class="dropzone" id="my-dropzone" name="myDropzone">
+                        
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <button type="submit" class="btn btn-success pull-right">
+                                            <i class="fa fa-save"></i>
+                                            <span>Save and back</span>
+                                        </button>
+                                    </div>
+                                </div> --}}
                                 <div class="text-center">
                                     {{ Form::reset(__('Reset'), ['class' => 'btn btn-default']) }}
                                     {{ Form::submit(__('Add'), ['class' => 'btn btn-success']) }}
@@ -524,4 +567,54 @@
         });
     }); 
 </script>
+
+<script src="{{ asset('dist/dropzone.js') }}"></script>
+<script type="text/javascript">
+   Dropzone.options.myDropzone= {
+       url: '{{ url('/manager/images/create') }}',
+       headers: {
+           'X-CSRF-TOKEN': '{!! csrf_token() !!}'
+       },
+       autoProcessQueue: true,
+       uploadMultiple: true,
+       parallelUploads: 5,
+       maxFiles: 10,
+       maxFilesize: 5,
+       acceptedFiles: ".jpeg,.jpg,.png,.gif",
+       dictFileTooBig: 'Image is bigger than 5MB',
+       addRemoveLinks: true,
+       removedfile: function(file) {
+       var name = file.name;    
+       name =name.replace(/\s+/g, '-').toLowerCase();    /*only spaces*/
+        $.ajax({
+            type: 'POST',
+            url: '{{ url('/manager/images/delete') }}',
+            headers: {
+                 'X-CSRF-TOKEN': '{!! csrf_token() !!}'
+             },
+            data: "id="+name,
+            dataType: 'html',
+            success: function(data) {
+                $("#msg").html(data);
+            }
+        });
+      var _ref;
+      if (file.previewElement) {
+        if ((_ref = file.previewElement) != null) {
+          _ref.parentNode.removeChild(file.previewElement);
+        }
+      }
+      return this._updateMaxFilesReachedClass();
+    },
+    previewsContainer: null,
+    hiddenInputContainer: "body",
+   }
+</script>
+<style>
+    .dropzone {
+        border: 2px dashed #0087F7;
+        border-radius: 5px;
+        background: white;
+    }
+</style>
 @endsection
