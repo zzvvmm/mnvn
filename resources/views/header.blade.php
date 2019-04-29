@@ -113,18 +113,61 @@
                     <div class="mainmenu">
                         <nav>
                             <ul class="list-inline mega-menu">
-                                <li class="active"><a href="{{ route('trang-chu') }}"> TRANG CHỦ</a>
+                                @if(Auth::check())
+                                    @if(Auth::user()->role == 1)
+                                        <li class="active"><a><font color="c1a300">Tài khoản Admin</font></a>
+                                            <!-- DROPDOWN MENU START -->
+                                            <div class="home-var-menu">
+                                                <ul class="home-menu">
+                                                    <li><a href="{{ route('backend.home') }}">Đến trang quản lý</a></li>
+                                                    <li><a href="{{ route('dang-xuat') }}">Đăng xuất</a></li>
+                                                </ul>												
+                                            </div>
+                                            <!-- DROPDOWN MENU END -->
+                                        </li>
+                                    @elseif(Auth::user()->role == 2)
+                                        <li class="active"><a><font color="c1a300">Tài khoản nhân viên</font></a>
+                                            <!-- DROPDOWN MENU START -->
+                                            <div class="home-var-menu">
+                                                <ul class="home-menu">
+                                                    <li><a href="{{ route('backend.home') }}">Đến trang nhân viên</a></li>
+                                                    <li><a href="{{ route('dang-xuat') }}">Đăng xuất</a></li>
+                                                </ul>												
+                                            </div>
+                                            <!-- DROPDOWN MENU END -->
+                                        </li>
+                                    @elseif(Auth::user()->role == 3)
+                                        <li class="active"><a><font color="c1a300">Tài khoản khách hàng</font></a>
+                                            <!-- DROPDOWN MENU START -->
+                                            <div class="home-var-menu">
+                                                <ul class="home-menu">
+                                                    <li><a href="{{ route('chinh-sua') }}">Thông tin khách hàng</a></li>
+                                                    <li><a href="{{ route('dang-xuat') }}">Đăng xuất</a></li>
+                                                </ul>												
+                                            </div>
+                                            <!-- DROPDOWN MENU END -->
+                                        </li>
+                                    @endif
+                                @else
+                                    <li><a href="{{ route('trang-chu') }}">TRANG CHỦ</a></li>
+                                @endif
                                 </li>
-                                <li><a href="{{ route('danh-muc', 'san-pham-ma-vang') }}">SẢN PHẨM MẠ VÀNG</a></li>
                                 <li>
                                     <a href="{{ route('gioi-thieu') }}" class="icon-arrows">GIỚI THIỆU</a>
                                     <!-- DRODOWN-MEGA-MENU END -->
                                 </li>
                                 <li>
                                     <a href="{{ route('huong-dan') }}">HƯỚNG DẪN MUA HÀNG</a>
-                                    <!-- DRODOWN-MEGA-MENU START -->	
-                                    <!-- DRODOWN-MEGA-MENU END -->										
                                 </li>
+                                <li>
+                                    <a href="#">CÁC BÀI VIẾT</a>
+                                </li>
+                                @if(Auth::check())
+                                @else
+                                <li>
+                                    <a href="{{ route('dang-nhap') }}"><font color="c1a300">Đăng nhập/đăng ký</font></a>
+                                </li>
+                                @endif
                                 {{-- <li><a href="#">THẾ GIỚI TÂM LINH</a></li> --}}
                             </ul>
                         </nav>

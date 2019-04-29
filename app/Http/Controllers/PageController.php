@@ -7,6 +7,7 @@ use App\Http\Requests\OrderRequest;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use App\Category;
+use App\User;
 use App\Product;
 use App\ProductType;
 use App\Cart;
@@ -30,6 +31,119 @@ class PageController extends Controller
         $ma_vang = Product::where('id_type', 38)->get();
         
         return view('page.trangchu', compact( 'qua_tang', 'tranh_dong', 'do_tho_cung', 'do_phong_thuy', 'huy_hieu', 'ma_vang'));
+    }
+
+    public function getLogin() 
+    {
+        return view('page.login');
+    }
+
+    public function postLogin(Request $req) 
+    {
+        $this->validate($req,
+            [
+                'email'=>'required|email',
+                'password'=>'required|min:6|max:20'
+            ],
+            [
+                'email.required'=>'Vui lòng nhập email',
+                'email.email'=>'Không đúng định dạng email',  
+                'password.required'=>'Vui lòng nhập mật khẩu',
+                'password.min'=>'Mật khẩu tối thiểu 6 kí tự',
+                'password.max'=>'Mật khẩu tối đa 20 kí tự'               
+            ]
+        );
+        $credientials = array('email'=>$req->email, 'password'=>$req->password);
+        if(Auth::attempt($credientials)) {
+            
+            return redirect()->route('trang-chu')->with(['flag'=>'success', 'message'=>'Đăng nhập thành công ! Mỹ Nghệ Việt Nam kính chào quý khách']);
+        }
+        else {
+            return redirect()->back()->with(['flag'=>'danger', 'message'=>'Đăng nhập không thành công, sai email hoặc password, vui lòng thử lại']);
+        }
+    }
+
+    public function getLogout() 
+    {
+        Auth::logout();
+        return redirect()->route('trang-chu');
+    }
+
+    public function getSignup() {
+        return view('page.login');
+    }
+
+    public function postSignup(Request $req) {
+        $this->validate($req,
+            [
+            'emailsignup'=>'required|email|unique:users,email',
+            'passwordsignup'=>'required|min:6|max:20',
+            'name'=>'required',
+            'phone'=>'required',
+            'address'=>'required',
+            're_passwordsignup'=>'required|same:passwordsignup'
+        ],
+        [
+            'email.required'=>'Vui lòng nhập email',
+            'name.required'=>'Vui lòng nhập Họ và tên',
+            'phone.required'=>'Vui lòng nhập Số điện thoại liên hệ',
+            'address.required'=>'Vui lòng nhập địa chỉ liên hệ',
+            'email.email'=>'Không đúng định dạng email',  
+            'email.unique'=>'Email đã có người sử dụng',
+            'passwordsignup.required'=>'Vui lòng nhập password',
+            'passwordsignup.min'=>'Mật khẩu tối thiểu 6 kí tự',
+            'passwordsignup.max'=>'Mật khẩu tối đa 20 kí tự',
+            're_passwordsignup.required'=>'Vui lòng nhập lại password',
+            're_passwordsignup.same'=>'Mật khẩu không trùng khớp'
+        ]);
+        $user = new User();
+        $user->name = $req->name;
+        $user->gender = $req->gender;
+        $user->email = $req->emailsignup;
+        $user->password = Hash::make($req->passwordsignup);
+        $user->phone = $req->phone;
+        $user->role = 3;
+        $user->address = $req->address;
+        $user->save();
+        return redirect()->back()->with('thanh-cong', 'Đã tạo tài khoản thành công.Vui lòng đăng nhập để tiếp tục');
+    }
+
+    public function getEdit() {
+        return view('page.chinhsua');
+    }
+
+    public function postEdit(Request $req) {
+        $this->validate($req,
+            [
+            'password'=>'max:20',
+            're_password'=>'same:password'
+        ],
+        [
+            'password.max'=>'Mật khẩu mới tối đa 20 kí tự',
+            're_password.same'=>'Mật khẩu mới không trùng khớp'
+        ]);
+
+        $current_user = User::find(Auth::user()->id);
+        $current_user->name = $req->name;
+        $current_user->gender = $req->gender;
+        $current_user->phone = $req->phone;
+        $current_user->address = $req->address;
+        if ($req->password !== null) {
+            if (password_verify($req->old_password, $current_user->password)) {
+                $current_user->password = Hash::make($req->password); 
+            } else {
+                return redirect()->back()->with('sua-that-bai', 'Mật khẩu cũ không đúng');
+            }
+
+            if (strlen($req->password) < 6) {
+                return redirect()->back()->with('sua-that-bai-2', 'Mật khẩu mới tối thiểu 6 kí tự');
+            }
+        }
+                   
+        $current_user->save();
+        // var_dump($current_user);
+        // exit;
+        return redirect()->back()->with('sua-thanh-cong', 'Sửa thông tin cá nhân thành công');
     }
 
     public function getAddToCart(Request $request, $id) 

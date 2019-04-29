@@ -1,9 +1,15 @@
 @extends('master')
 @section('title', 'MỸ NGHỆ VIỆT NAM')
 @section('content')
+
 <section class="header-bottom-area">
     <div class="container">
         <div class="row">
+            @if(Session::get('flag') === 'success')
+                <div class="row alert alert-success">{{Session::get('message')}}</div> 
+            @else
+            
+            @endif
             @include('navbar')
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                 <div class="main-slider-area">

@@ -13,6 +13,20 @@
 
 Route::get('/', 'PageController@getIndex')->name('trang-chu');
 
+Route::get('login', 'PageController@getLogin')->name('dang-nhap');
+
+Route::post('login', 'PageController@postLogin')->name('dang-nhap');
+
+Route::get('logout', 'PageController@getLogout')->name('dang-xuat');
+
+Route::get('signup', 'PageController@getSignup')->name('dang-ky');
+
+Route::post('signup', 'PageController@postSignup')->name('dang-ky');
+
+Route::get('edit-infor', 'PageController@getEdit')->name('chinh-sua');
+
+Route::post('edit-infor', 'PageController@postEdit')->name('chinh-sua');
+
 Route::get('addToCart/{id}', 'PageController@getAddToCart')->name('them-gio-hang');
 
 Route::post('addToCart/{id}', 'PageController@postAddToCart')->name('them-gio-hang');
@@ -30,7 +44,9 @@ Route::get('san-pham/{slug}', 'PageController@getProductDetails')->name('chi-tie
 Route::get('dat-hang', 'PageController@getCheckout')->name('dat-hang');
 
 Route::get('dat-hang-step2', function() {
+
     return view('page.dat_hang_buoc_2');
+
 })->name('step2');
 
 Route::post('dat-hang', 'PageController@postCheckout')->name('dat-hang');

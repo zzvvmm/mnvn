@@ -28,7 +28,6 @@ class Category extends Model
     // }
 
 
-
     use Sluggable;
 
     /**
