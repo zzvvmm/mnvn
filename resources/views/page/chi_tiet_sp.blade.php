@@ -170,6 +170,8 @@
                                                 <div id="comments-container"></div>
 
                                             </div>
+                                            <input type="hidden" id="product-id" name="product-id" value="{{ $sanpham->id }}">
+
                                             @if(!Auth::check())
                                                 <a href="{{ route('dang-nhap') }}"><font color="c1a300">Đăng nhập/đăng ký để bình luận</font></a>
                                             @else
@@ -181,10 +183,9 @@
 
                                                             <label for="comments">Nhập bình luận của bạn</label>
                                                             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-
+                                                            <input type="hidden" id="product-id" name="product-id" value="{{ $sanpham->id }}">
                                                             <input type="hidden" id="current-name" name="current-name" value="{{Auth::user()->name}}">
                                                             <input type="hidden" id="current-id" name="current-id" value="{{Auth::user()->id}}">
-                                                            <input type="hidden" id="product-id" name="product-id" value="{{ $sanpham->id }}">
                                                             <input class="form-control" id="comments" name="comments">
 
                                                         </div>
@@ -351,6 +352,7 @@
     var commentsContainer = $('#comments-container');
     var name = snapshot.val()["name"];
     var product_id = $('#product-id').val();
+    // alert(snapshot.val()["product_id"]+' '+ product_id);
     if (snapshot.val()["product_id"]==product_id){
         $('<div/>', {class: 'comment-container'})
             .html('<span class="label label-info">'+name + '</span> ' + comment)
