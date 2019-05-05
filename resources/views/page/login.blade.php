@@ -111,35 +111,34 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <!-- REGISTERED-ACCOUNT START -->
                     <div class="primari-box registered-account">
-                        <h3 class="box-subheading">Đăng nhập</h3>
-                        @if (Request::has('previous'))
-                            <input type="hidden" name="previous" value="{{ Request::get('previous') }}">
+                    @if(!Auth::check())
+                            <h3 class="box-subheading">Đăng nhập</h3>
+                            @if(Session::get('flag') === 'danger')
+                                <div class="row alert alert-danger">{{Session::get('message')}}</div> 
+                            @else
+                            @endif
+                            <form class="new-account-box" id="accountLogin" method="post" action="{{ route('dang-nhap') }}">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <div class="form-content">
+                                    <div class="form-group primary-form-group">
+                                        <label for="loginemail">Email</label>
+                                        <input type="emailadas" value="" name="email" id="loginemail" class="form-control input-feild" required>
+                                    </div>
+                                    <div class="form-group primary-form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" value="" name="password" id="password" class="form-control input-feild" required>
+                                    </div>
+                                    <div class="forget-password">
+                                        <p><a href="#">Forgot your password?</a></p>
+                                    </div>
+                                    <div class="submit-button">
+                                        <button type="submit" id="SubmitCreate" class="btn btn-danger"><i class="fa fa-lock submit-icon"></i> Đăng nhập </button>
+                                    </div>
+                                </div>
+                            </form>
                         @else
-                            <input type="hidden" name="previous" value="{{ URL::previous() }}">
+                            <h3 class="box-subheading">Bạn đã đăng nhập</h3>
                         @endif
-                        @if(Session::get('flag') === 'danger')
-                            <div class="row alert alert-danger">{{Session::get('message')}}</div> 
-                        @else
-                        @endif
-                        <form class="new-account-box" id="accountLogin" method="post" action="{{ route('dang-nhap') }}">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            <div class="form-content">
-                                <div class="form-group primary-form-group">
-                                    <label for="loginemail">Email</label>
-                                    <input type="emailadas" value="" name="email" id="loginemail" class="form-control input-feild" required>
-                                </div>
-                                <div class="form-group primary-form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" value="" name="password" id="password" class="form-control input-feild" required>
-                                </div>
-                                <div class="forget-password">
-                                    <p><a href="#">Forgot your password?</a></p>
-                                </div>
-                                <div class="submit-button">
-                                    <button type="submit" id="SubmitCreate" class="btn btn-danger"><i class="fa fa-lock submit-icon"></i> Đăng nhập </button>
-                                </div>
-                            </div>
-                        </form>	
                     </div>
                     <!-- REGISTERED-ACCOUNT END -->
                 </div>				

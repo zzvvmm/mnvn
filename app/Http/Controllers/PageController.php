@@ -56,10 +56,10 @@ class PageController extends Controller
         $credientials = array('email'=>$req->email, 'password'=>$req->password);
         if(Auth::attempt($credientials)) {
             
-            return redirect()->back()->with(['flag'=>'success', 'message'=>'Đăng nhập thành công ! Mỹ Nghệ Việt Nam kính chào quý khách']);
+            return redirect()->route('trang-chu')->with(['flag'=>'success', 'message'=>'Đăng nhập thành công ! Mỹ Nghệ Việt Nam kính chào quý khách']);
         }
         else {
-            return redirect()->back()->with(['flag'=>'danger', 'message'=>'Đăng nhập không thành công, sai email hoặc password, vui lòng thử lại']);
+            return redirect()->route('dang-nhap')->with(['flag'=>'danger', 'message'=>'Đăng nhập không thành công, sai email hoặc password, vui lòng thử lại']);
         }
     }
 

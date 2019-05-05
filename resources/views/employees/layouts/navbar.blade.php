@@ -5,7 +5,7 @@
                 <span>{{ __('Tài khoản nhân viên') }}</span>
             </li>
             <li class="nav-item dropdown">
-                <a class="dropdown-toggle" href="#">
+                <a class="dropdown-toggle" href="{{ route('profile.index') }}">
                     <span class="icon-holder"><i class=""></i></span>
                     <span class="title">{{ __('Thông tin nhân viên') }}</span>
                 </a>

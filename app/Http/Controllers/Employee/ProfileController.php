@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Employee;
 
+use App\Http\Requests\ProfileUpdateFormRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Auth;
 
 class ProfileController extends Controller
 {
@@ -13,9 +15,9 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        
+        return view('employees.profile.index');
     }
 
     /**
@@ -58,7 +60,9 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = User::find($id);
+        
+        return view('employees.profile.edit', compact('employee'));
     }
 
     /**
@@ -68,9 +72,22 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, ProfileUpdateFormRequest $request)
     {
-        //
+        $employee = User::find(Auth::user()->id);
+        if($request->password !== null) {
+            $employee->password = Hash::make($request->password);
+        } else {
+            $employee->password = $employee->password;
+        }
+        $employee->name = $request->name;
+        $employee->phone = $request->phone;
+        $employee->gender = $request->gender;
+        $employee->address = $request->address;
+        
+        $employee ->save();
+
+        return redirect()->route('profile.index')->with('success', __('Chỉnh sửa thành công'));
     }
 
     /**

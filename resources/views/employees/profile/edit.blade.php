@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title', 'Edit a user')
+@section('title', 'Thay đổi thông tin')
 @section('content')
 
 <div class="page-container">
@@ -11,9 +11,9 @@
                         <h2 class="header-title">{{ __('user') }}</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
-                                <a href="{{ route('manager.home') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>{{ __('home') }}</a>
-                                <a class="breadcrumb-item" href="{{ route('profile.index') }}">{{ __('user') }}</a>
-                                <span class="breadcrumb-item active">{{ __('edit') }}</span>
+                                <a href="{{ route('employee.home') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>{{ __('Home') }}</a>
+                                <a class="breadcrumb-item" href="{{ route('profile.index') }}">{{ __('Thông tin nhân viên') }}</a>
+                                <span class="breadcrumb-item active">{{ __('Chỉnh sửa') }}</span>
                             </nav>
                         </div>
                     </div>
@@ -22,12 +22,12 @@
                         <fieldset>
                             <div class="card">
                                 <div class="card-body"> 
-                                    <legend class="text-center">  {{ __('Edit Information') }} </legend>
+                                    <legend class="text-center">  {{ __('Chỉnh sửa thông tin') }} </legend>
                                     <hr>
                                     <div class="form-group">
-                                        {{ Form::label(__('name'), null, ['class' => 'col-lg-2 control-label']) }}
+                                        {{ Form::label(__('Tên'), null, ['class' => 'col-lg-2 control-label']) }}
                                         <div class="col-lg-12">
-                                        {{ Form::text('name', $employee->name, ['class' => 'form-control', 'placeholder' => 'Name' ]) }}
+                                        {{ Form::text('name', $employee->name, ['class' => 'form-control', 'placeholder' => 'Tên' ]) }}
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -38,7 +38,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        {{ Form::label(__('Change_Password'), null, ['class' => 'col-lg-3 control-label']) }}
+                                        {{ Form::label(__('Thay đổi password'), null, ['class' => 'col-lg-3 control-label']) }}
                                         <div class="col-lg-12">
                                             {{ Form::checkbox('changepassword', null, false, ['id' => 'changepassword']) }}
                                             {{ Form::password('password', ['class' => 'form-control password', 'required' => '', 'placeholder' => 'Password', 'disabled' => 'disabled' ]) }}
@@ -70,15 +70,15 @@
                                         </div>
                                     @endif
                                     <div class="form-group">
-                                        {{ Form::label(__('phone'), null, ['class' => 'col-lg-2 control-label']) }}
+                                        {{ Form::label(__('Điện thoại'), null, ['class' => 'col-lg-2 control-label']) }}
                                         <div class="col-lg-12">
                                             {{ Form::text('phone', $employee->phone, ['class' => 'form-control', 'placeholder' => 'Phone Number' ]) }}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        {{ Form::label(__('sex'), null, ['class' => 'col-lg-2 control-label']) }}
+                                        {{ Form::label(__('Giới tính'), null, ['class' => 'col-lg-2 control-label']) }}
                                         <div class="col-lg-12">
-                                            {{ Form::select('sex', ['0' => __('male'), '1' => __('female')], null, ['class' => 'form-control']) }}  
+                                            {{ Form::select('gender', ['nam' => __('Nam'), 'nữ' => __('Nữ')], null, ['class' => 'form-control']) }}  
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -87,21 +87,6 @@
                                             {{ Form::text('address', $employee->address, ['class' => 'form-control', 'placeholder' => 'Address' ]) }}
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="upload-btn-wrapper">
-                                            {{ Form::file('avatar') }} 
-                                            {{ Form::button(__('change_avatar'), ['class' => 'btn-upload']) }}
-                                        </div>
-                                    </div>
-                                    @if ($errors->has('avatar'))
-                                        <div class="alert alert-danger">
-                                            <ul>
-                                                @foreach ($errors->get('avatar') as $avatar)
-                                                    <li>{{ $avatar }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    @endif
                                     <div class="text-center">
                                         {{ Form::reset(__('Cancel'), ['class' => 'btn btn-warning']) }}
                                         {{ Form::submit(__('Submit'), ['class' => 'btn btn-success']) }}
