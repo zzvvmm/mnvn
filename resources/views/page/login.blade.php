@@ -112,7 +112,11 @@
                     <!-- REGISTERED-ACCOUNT START -->
                     <div class="primari-box registered-account">
                         <h3 class="box-subheading">Đăng nhập</h3>
-
+                        @if (Request::has('previous'))
+                            <input type="hidden" name="previous" value="{{ Request::get('previous') }}">
+                        @else
+                            <input type="hidden" name="previous" value="{{ URL::previous() }}">
+                        @endif
                         @if(Session::get('flag') === 'danger')
                             <div class="row alert alert-danger">{{Session::get('message')}}</div> 
                         @else

@@ -173,7 +173,7 @@
                                             <input type="hidden" id="product-id" name="product-id" value="{{ $sanpham->id }}">
 
                                             @if(!Auth::check())
-                                                <a href="{{ route('dang-nhap') }}"><font color="c1a300">Đăng nhập/đăng ký để bình luận</font></a>
+                                                <a href="{{ route('dang-nhap'). '?previous=' . Request::fullUrl()  }}"><font color="c1a300">Đăng nhập/đăng ký để bình luận</font></a>
                                             @else
                                                 <div class="panel-footer">
 
