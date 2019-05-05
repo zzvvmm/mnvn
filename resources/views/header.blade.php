@@ -130,7 +130,7 @@
                                             <!-- DROPDOWN MENU START -->
                                             <div class="home-var-menu">
                                                 <ul class="home-menu">
-                                                    <li><a href="{{ route('backend.home') }}">Đến trang nhân viên</a></li>
+                                                    <li><a href="{{ route('employee.home') }}">Đến trang nhân viên</a></li>
                                                     <li><a href="{{ route('dang-xuat') }}">Đăng xuất</a></li>
                                                 </ul>												
                                             </div>

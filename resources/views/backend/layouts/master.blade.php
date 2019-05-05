@@ -25,11 +25,18 @@
 
     <div class="app header-default side-nav-dark">
         <div class="layout">
+            @guest
+            @else
                 @include('backend.layouts.header')
-                @include('backend.layouts.navbar')
+                @if (Auth::user()->role == 1))
+                    @include('backend.layouts.navbar')
+                @else
+                    @include('employees.layouts.navbar')
+                @endif
                 @include('backend.layouts.config')
+            @endguest
             @yield('content')
-         </div>
+            </div>
     </div>
 
     {{ Html::script('assets/ckeditor/ckeditor.js') }}

@@ -94,9 +94,12 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
 });
 
 Route::group(['prefix' => 'employee', 'namespace' => 'Employee', 'middleware' => 'employee']
+
     , function () {
 
-        Route::get('/home', 'PagesController@index')->name('employee.home');
+        Route::get('/home', 'PageController@index')->name('employee.home');
+
+        Route::resource('profile', 'ProfileController', ['except' => ['show', 'store', 'destroy']]);
 
 });
 Route::resource('comments', 'CommentController');

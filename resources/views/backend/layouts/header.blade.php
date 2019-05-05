@@ -39,14 +39,7 @@
                     <img class="profile-img img-fluid" src="{{ asset('source/img/product/' . 'avatar.png') }}" alt="avatar">
                 </a>
                 <ul class="dropdown-menu dropdown-md p-v-0">
-                    <li><center>
-                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            {{-- <i class="ti-power-off p-r-10"></i> --}}
-                            <span><h4>{{ __('Đăng xuất') }}</h4></span>
-                        </a></center>
-                        {!! Form::open(['method' => 'POST', 'url' => 'manager/logout', 'id' => 'logout-form']) !!} 
-                        {!! Form::close() !!}
-                    </li>
+                        <li><a href="{{ route('dang-xuat') }}">Đăng xuất</a></li>
                 </ul>
             </li>
             @endguest
