@@ -60,7 +60,7 @@ Route::get('huong-dan-mua-hang', 'PageController@getManual')->name('huong-dan');
 Route::get('chinh-sach-va-quy-dinh-chung', 'PageController@getBasicRole')->name('chinh-sach-chung');
 
 Route::get('chinh-sach-bao-mat', 'PageController@getSecurity')->name('chinh-sach-bao-mat');
-	
+
 Route::get('chinh-sach-doi-tra-hang', 'PageController@getExchange')->name('chinh-sach-doi-tra-hang');
 
 Route::get('chinh-sach-bao-hanh', 'PageController@getGuarantee')->name('chinh-sach-bao-hanh');
@@ -99,3 +99,4 @@ Route::group(['prefix' => 'employee', 'namespace' => 'Employee', 'middleware' =>
         Route::get('/home', 'PagesController@index')->name('employee.home');
 
 });
+Route::resource('comments', 'CommentController');

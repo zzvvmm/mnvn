@@ -15,9 +15,14 @@ class Comment extends Model
 	    'post_type',
     ];
 
-    public function product()
+  public function product()
 	{
 		return $this->belongsTo('App\Product');
+	}
+
+	public function user()
+	{
+		return $this->belongsTo('App\User');
 	}
 
 	public function post()

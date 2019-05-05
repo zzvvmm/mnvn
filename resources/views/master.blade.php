@@ -7,117 +7,117 @@
         <meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<base href="{{asset('')}}">
-		
+
 		<!-- Favicon
 		============================================ -->
 		<link rel="shortcut icon" type="image/x-icon" href="source/img/logo1.png">
-		
+
 		<!-- FONTS
-		============================================ -->	
-		<link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'> 
+		============================================ -->
+		<link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Bitter:400,700,400italic&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-		
+
 		<!-- animate CSS
 		============================================ -->
-        <link rel="stylesheet" href="source/css/animate.css">			
-		
+        <link rel="stylesheet" href="source/css/animate.css">
+
 		<!-- FANCYBOX CSS
-		============================================ -->			
-        <link rel="stylesheet" href="source/css/jquery.fancybox.css">	
-		
+		============================================ -->
+        <link rel="stylesheet" href="source/css/jquery.fancybox.css">
+
 		<!-- BXSLIDER CSS
-		============================================ -->			
-        <link rel="stylesheet" href="source/css/jquery.bxslider.css">			
-				
+		============================================ -->
+        <link rel="stylesheet" href="source/css/jquery.bxslider.css">
+
 		<!-- MEANMENU CSS
-		============================================ -->			
-        <link rel="stylesheet" href="source/css/meanmenu.min.css">	
-		
+		============================================ -->
+        <link rel="stylesheet" href="source/css/meanmenu.min.css">
+
 		<!-- JQUERY-UI-SLIDER CSS
-		============================================ -->			
-        <link rel="stylesheet" href="source/css/jquery-ui-slider.css">		
-		
+		============================================ -->
+        <link rel="stylesheet" href="source/css/jquery-ui-slider.css">
+
 		<!-- NIVO SLIDER CSS
-		============================================ -->			
+		============================================ -->
         <link rel="stylesheet" href="source/css/nivo-slider.css">
-		
-		<!-- OWL CAROUSEL CSS 	
-		============================================ -->	
+
+		<!-- OWL CAROUSEL CSS
+		============================================ -->
         <link rel="stylesheet" href="source/css/owl.carousel.css">
-		
-		<!-- OWL CAROUSEL THEME CSS 	
-		============================================ -->	
+
+		<!-- OWL CAROUSEL THEME CSS
+		============================================ -->
          <link rel="stylesheet" href="source/css/owl.theme.css">
-		
-		<!-- BOOTSTRAP CSS 
-		============================================ -->	
+
+		<!-- BOOTSTRAP CSS
+		============================================ -->
         <link rel="stylesheet" href="source/css/bootstrap.min.css">
-		
-		<!-- FONT AWESOME CSS 
+
+		<!-- FONT AWESOME CSS
 		============================================ -->
         <link rel="stylesheet" href="source/css/font-awesome.min.css">
-		
-		<!-- NORMALIZE CSS 
+
+		<!-- NORMALIZE CSS
 		============================================ -->
         <link rel="stylesheet" href="source/css/normalize.css">
-		
-		<!-- MAIN CSS 
+
+		<!-- MAIN CSS
 		============================================ -->
         <link rel="stylesheet" href="source/css/main.css">
-		
-		<!-- STYLE CSS 
+
+		<!-- STYLE CSS
 		============================================ -->
         <link rel="stylesheet" href="source/style.css">
-		
-		<!-- RESPONSIVE CSS 
+
+		<!-- RESPONSIVE CSS
 		============================================ -->
         <link rel="stylesheet" href="source/css/responsive.css">
-		
-		<!-- IE CSS 
+
+		<!-- IE CSS
 		============================================ -->
-        <link rel="stylesheet" href="source/css/ie.css">		
-		
-		<!-- MODERNIZR JS 
+        <link rel="stylesheet" href="source/css/ie.css">
+
+		<!-- MODERNIZR JS
 		============================================ -->
         <script src="source/js/vendor/modernizr-2.6.2.min.js"></script>
-		
+
 	</head>
-	
+
     <body class="index-2">
 	@include('header')
 		@yield('content')
     @include('footer')
 		<!-- jquery js -->
 		<script src="source/js/vendor/jquery-1.11.3.min.js"></script>
-		
+
 		<!-- fancybox js -->
         <script src="source/js/jquery.fancybox.js"></script>
-		
+
 		<!-- bxslider js -->
         <script src="source/js/jquery.bxslider.min.js"></script>
-		
+
 		<!-- meanmenu js -->
         <script src="source/js/jquery.meanmenu.js"></script>
-		
+
 		<!-- owl carousel js -->
         <script src="source/js/owl.carousel.min.js"></script>
-		
+
 		<!-- nivo slider js -->
         <script src="source/js/jquery.nivo.slider.js"></script>
-		
+
 		<!-- jqueryui js -->
         <script src="source/js/jqueryui.js"></script>
-		
+
 		<!-- bootstrap js -->
         <script src="source/js/bootstrap.min.js"></script>
-		
+
 		<!-- wow js -->
-        <script src="source/js/wow.js"></script>		
+        <script src="source/js/wow.js"></script>
 		<script>
 			new WOW().init();
 		</script>
-
+		<script src="https://cdn.firebase.com/js/client/1.0.6/firebase.js"></script>
 		<!-- Google Map js -->
         {{-- <script src="https://maps.googleapis.com/maps/api/js"></script>	 --}}
 		{{-- <script>
@@ -135,7 +135,7 @@
 			  });
 
 			}
-			google.maps.event.addDomListener(window, 'load', initialize);				
+			google.maps.event.addDomListener(window, 'load', initialize);
 		</script> --}}
 		<!-- main js -->
 		<script src="source/js/main.js"></script>
