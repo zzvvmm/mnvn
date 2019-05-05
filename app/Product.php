@@ -30,24 +30,27 @@ class Product extends Model
 
     // protected $guarded = ['id'];
 
-    public function product_type() 
+    public function product_type()
     {
     	return $this->belongsTo('App\ProductType', 'id_type', 'id');
     }
 
-    public function image() 
+    public function image()
     {
         return $this->hasMany('App\Image', 'id_product', 'id');
     }
-
-    public function getImage($id) 
+    public function comments()
+    {
+        return $this->hasMany('App\Comment', 'id_product', 'id');
+    }
+    public function getImage($id)
     {
         $image = Image::where('id_product', $id)->first();
 
         return $image;
     }
 
-    public function getAllImage($id) 
+    public function getAllImage($id)
     {
         $image = Image::where('id_product', $id)->get();
 
