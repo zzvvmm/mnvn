@@ -116,26 +116,26 @@
                         @if(Session::get('flag') === 'danger')
                             <div class="row alert alert-danger">{{Session::get('message')}}</div> 
                         @else
-                            <form class="new-account-box" id="accountLogin" method="post" action="{{ route('dang-nhap') }}">
-                                <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                <div class="form-content">
-                                    <div class="form-group primary-form-group">
-                                        <label for="loginemail">Email</label>
-                                        <input type="emailadas" value="" name="email" id="loginemail" class="form-control input-feild" required>
-                                    </div>
-                                    <div class="form-group primary-form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" value="" name="password" id="password" class="form-control input-feild" required>
-                                    </div>
-                                    <div class="forget-password">
-                                        <p><a href="#">Forgot your password?</a></p>
-                                    </div>
-                                    <div class="submit-button">
-                                        <button type="submit" id="SubmitCreate" class="btn btn-danger"><i class="fa fa-lock submit-icon"></i> Đăng nhập </button>
-                                    </div>
+                        @endif
+                        <form class="new-account-box" id="accountLogin" method="post" action="{{ route('dang-nhap') }}">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <div class="form-content">
+                                <div class="form-group primary-form-group">
+                                    <label for="loginemail">Email</label>
+                                    <input type="emailadas" value="" name="email" id="loginemail" class="form-control input-feild" required>
                                 </div>
-                            </form>	
-                        @endif						
+                                <div class="form-group primary-form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" value="" name="password" id="password" class="form-control input-feild" required>
+                                </div>
+                                <div class="forget-password">
+                                    <p><a href="#">Forgot your password?</a></p>
+                                </div>
+                                <div class="submit-button">
+                                    <button type="submit" id="SubmitCreate" class="btn btn-danger"><i class="fa fa-lock submit-icon"></i> Đăng nhập </button>
+                                </div>
+                            </div>
+                        </form>	
                     </div>
                     <!-- REGISTERED-ACCOUNT END -->
                 </div>				

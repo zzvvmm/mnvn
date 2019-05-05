@@ -16,7 +16,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <h2 class="page-title">Xem / Chỉnh sửa thông tin cá nhân</h2>
+                    <h2 class="page-title"> Xem / Chỉnh sửa thông tin cá nhân</h2>
                     @if(count($errors) > 0)
                         <div class="alert alert-danger">
                             @foreach($errors->all() as $err)
@@ -96,7 +96,7 @@
                     <form class="new-account-box primari-box" id="create-new-account" method="post" action="{{ route('chinh-sua') }}">
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            <h3 class="box-subheading">Xem / Chỉnh sửa thông tin cá nhân</h3>
+                            <h3 class="box-subheading">Tài khoản : {{ Auth::user()->email }}</h3>
                             @if(Session::has('thanh-cong'))
                                 <div class="alert alert-success">{{Session::get('thanh-cong')}}</div>
                             @else

@@ -74,6 +74,7 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
+                                
                             </div>
                             <br/>
                             <div class="single-product-price">

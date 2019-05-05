@@ -92,3 +92,10 @@ Route::group(['prefix' => 'manager', 'namespace' => 'Manager', 'middleware' => '
             Route::post('product_type/{idcategory}', 'AjaxController@getProductType')->name('getajax');
         });
 });
+
+Route::group(['prefix' => 'employee', 'namespace' => 'Employee', 'middleware' => 'employee']
+    , function () {
+
+        Route::get('/home', 'PagesController@index')->name('employee.home');
+
+});

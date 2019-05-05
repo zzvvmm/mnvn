@@ -59,7 +59,7 @@ class PageController extends Controller
             return redirect()->route('trang-chu')->with(['flag'=>'success', 'message'=>'Đăng nhập thành công ! Mỹ Nghệ Việt Nam kính chào quý khách']);
         }
         else {
-            return redirect()->back()->with(['flag'=>'danger', 'message'=>'Đăng nhập không thành công, sai email hoặc password, vui lòng thử lại']);
+            return redirect()->route('dang-nhap')->with(['flag'=>'danger', 'message'=>'Đăng nhập không thành công, sai email hoặc password, vui lòng thử lại']);
         }
     }
 
@@ -124,10 +124,22 @@ class PageController extends Controller
         ]);
 
         $current_user = User::find(Auth::user()->id);
-        $current_user->name = $req->name;
-        $current_user->gender = $req->gender;
-        $current_user->phone = $req->phone;
-        $current_user->address = $req->address;
+        if ($req->name !== null)
+        {
+            $current_user->name = $req->name;
+        }
+        if ($req->gender !== null)
+        {
+            $current_user->gender = $req->gender;
+        }
+        if ($req->phone !== null)
+        {
+            $current_user->phone = $req->phone;
+        }
+        if ($req->address !== null)
+        {
+            $current_user->address = $req->address;
+        }
         if ($req->password !== null) {
             if (password_verify($req->old_password, $current_user->password)) {
                 $current_user->password = Hash::make($req->password); 
@@ -141,8 +153,7 @@ class PageController extends Controller
         }
                    
         $current_user->save();
-        // var_dump($current_user);
-        // exit;
+
         return redirect()->back()->with('sua-thanh-cong', 'Sửa thông tin cá nhân thành công');
     }
 

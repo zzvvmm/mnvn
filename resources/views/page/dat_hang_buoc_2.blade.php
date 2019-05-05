@@ -43,17 +43,17 @@
                                         
                                         <div class="form-group primary-form-group p-info-group">
                                             <label for="firstname">Họ và tên <sup>*</sup></label>
-                                            <input type="text" value="" name="name" id="name" class="form-control input-feild">
+                                            <input type="text" value="@if(Auth::check()){{Auth::user()->name}}@endif" name="name" id="name" class="form-control input-feild" required>
                                         </div>
                                         <br/> 
                                         <div class="form-group primary-form-group p-info-group">
                                             <label>Giới tính<sup>*</sup></label>
                                             <span class="radio-box">
-                                                <input id="radio1" type="radio" name="gender" value="nam" checked="checked">
+                                                <input id="radio1" type="radio" name="gender" value="nam" @if(Auth::check() && Auth::user()->gender === 'nam') checked = ""  @endif >
                                                 <label for="radio1">Nam</label>
                                             </span>
                                             <span class="radio-box">
-                                                <input id="radio2" type="radio" name="gender" value="nữ">
+                                                <input id="radio2" type="radio" name="gender" value="nữ" @if(Auth::check() && Auth::user()->gender === 'nữ') checked = ""  @endif>
                                                 
                                                 <label for="radio2">Nữ</label>
                                             </span>
@@ -61,16 +61,16 @@
                                         <br/> 
                                         <div class="form-group primary-form-group p-info-group">
                                             <label for="email">Email<sup>*</sup></label>
-                                            <input type="email" value="" name="email" id="email" class="form-control input-feild">
+                                            <input type="email" value="@if(Auth::check()){{Auth::user()->email}}@endif" name="email" id="email" class="form-control input-feild" required>
                                         </div>
                                         <div class="form-group primary-form-group p-info-group">
                                             <label for="email">Số điện thoại <sup>*</sup></label>
-                                            <input type="text" value="" name="phone" id="phone" class="form-control input-feild">
+                                            <input type="text" value="@if(Auth::check()){{Auth::user()->phone}}@endif" name="phone" id="phone" class="form-control input-feild" required>
                                             <span class="min-pass"></span>
                                         </div>
                                         <div class="form-group primary-form-group p-info-group">
                                             <label for="text">Địa chỉ giao hàng <sup>*</sup></label>
-                                            <input type="text" value="" name="address" id="address" class="form-control input-feild">
+                                            <input type="text" value="@if(Auth::check()){{Auth::user()->address}}@endif" name="address" id="address" class="form-control input-feild" required>
                                             <span class="min-pass"></span>
                                         </div>
                                         <div class="form-group primary-form-group p-info-group">

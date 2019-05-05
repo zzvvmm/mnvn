@@ -88,6 +88,7 @@ class ProductController extends Controller
             'color' => $request->color,
             'guarantee' => $request->guarantee,
             'material' => $request->material,
+            'rate'=> 0,
             // 'avatar' => $request->avatar->getClientOriginalName(),
             
         ]);

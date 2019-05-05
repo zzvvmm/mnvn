@@ -141,7 +141,7 @@
                                             <!-- DROPDOWN MENU START -->
                                             <div class="home-var-menu">
                                                 <ul class="home-menu">
-                                                    <li><a href="{{ route('chinh-sua') }}">Thông tin khách hàng</a></li>
+                                                    <li><a href="{{ route('chinh-sua') }}">Thông tin tài khoản</a></li>
                                                     <li><a href="{{ route('dang-xuat') }}">Đăng xuất</a></li>
                                                 </ul>												
                                             </div>
