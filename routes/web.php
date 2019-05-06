@@ -103,3 +103,4 @@ Route::group(['prefix' => 'employee', 'namespace' => 'Employee', 'middleware' =>
 
 });
 Route::resource('comments', 'CommentController');
+Route::post('/comments/delete', 'CommentController@delete')->name('comments.delete');;

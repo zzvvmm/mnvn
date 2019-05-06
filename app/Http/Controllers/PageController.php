@@ -15,6 +15,7 @@ use App\Customer;
 use App\Bill;
 use App\Image;
 use App\BillDetail;
+use App\Comment;
 use Session;
 use Hash;
 use Auth;
@@ -30,16 +31,16 @@ class PageController extends Controller
         $do_phong_thuy = Product::whereIn('id_type', [27,28,29,30,31])->get()->reverse();
         $huy_hieu = Product::where('id_type', 37)->get();
         $ma_vang = Product::where('id_type', 38)->get();
-        
+
         return view('page.trangchu', compact( 'qua_tang', 'tranh_dong', 'do_tho_cung', 'do_phong_thuy', 'huy_hieu', 'ma_vang'));
     }
 
-    public function getLogin() 
+    public function getLogin()
     {
         return view('page.login');
     }
 
-    public function postLogin(Request $req) 
+    public function postLogin(Request $req)
     {
         $this->validate($req,
             [
@@ -48,15 +49,15 @@ class PageController extends Controller
             ],
             [
                 'email.required'=>'Vui lòng nhập email',
-                'email.email'=>'Không đúng định dạng email',  
+                'email.email'=>'Không đúng định dạng email',
                 'password.required'=>'Vui lòng nhập mật khẩu',
                 'password.min'=>'Mật khẩu tối thiểu 6 kí tự',
-                'password.max'=>'Mật khẩu tối đa 20 kí tự'               
+                'password.max'=>'Mật khẩu tối đa 20 kí tự'
             ]
         );
         $credientials = array('email'=>$req->email, 'password'=>$req->password);
         if(Auth::attempt($credientials)) {
-            
+
             return redirect()->route('trang-chu')->with(['flag'=>'success', 'message'=>'Đăng nhập thành công ! Mỹ Nghệ Việt Nam kính chào quý khách']);
         }
         else {
@@ -64,7 +65,7 @@ class PageController extends Controller
         }
     }
 
-    public function getLogout() 
+    public function getLogout()
     {
         Auth::logout();
         return redirect()->route('trang-chu');
@@ -89,7 +90,7 @@ class PageController extends Controller
             'name.required'=>'Vui lòng nhập Họ và tên',
             'phone.required'=>'Vui lòng nhập Số điện thoại liên hệ',
             'address.required'=>'Vui lòng nhập địa chỉ liên hệ',
-            'email.email'=>'Không đúng định dạng email',  
+            'email.email'=>'Không đúng định dạng email',
             'email.unique'=>'Email đã có người sử dụng',
             'passwordsignup.required'=>'Vui lòng nhập password',
             'passwordsignup.min'=>'Mật khẩu tối thiểu 6 kí tự',
@@ -143,7 +144,7 @@ class PageController extends Controller
         }
         if ($req->password !== null) {
             if (password_verify($req->old_password, $current_user->password)) {
-                $current_user->password = Hash::make($req->password); 
+                $current_user->password = Hash::make($req->password);
             } else {
                 return redirect()->back()->with('sua-that-bai', 'Mật khẩu cũ không đúng');
             }
@@ -152,35 +153,35 @@ class PageController extends Controller
                 return redirect()->back()->with('sua-that-bai-2', 'Mật khẩu mới tối thiểu 6 kí tự');
             }
         }
-                   
+
         $current_user->save();
 
         return redirect()->back()->with('sua-thanh-cong', 'Sửa thông tin cá nhân thành công');
     }
 
-    public function getAddToCart(Request $request, $id) 
+    public function getAddToCart(Request $request, $id)
     {
         $product = Product::find($id);
         $oldCart = Session('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
-        $cart->add($product, $id);   
+        $cart->add($product, $id);
         $request->session()->put('cart', $cart);
 
         return redirect()->back();
     }
 
-    public function postAddToCart(Request $request, $id) 
+    public function postAddToCart(Request $request, $id)
     {
         $product = Product::find($id);
         $oldCart = Session('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
-        $cart->addMany($product, $id, $request->qty);   
+        $cart->addMany($product, $id, $request->qty);
         $request->session()->put('cart', $cart);
 
         return redirect()->back();
     }
 
-    public function getDeleteItemCart($id) 
+    public function getDeleteItemCart($id)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -194,7 +195,7 @@ class PageController extends Controller
         return redirect()->back();
     }
 
-    public function getDeleteOneItemCart($id) 
+    public function getDeleteOneItemCart($id)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
@@ -208,7 +209,7 @@ class PageController extends Controller
         return redirect()->back();
     }
 
-    public function getCategory($slug) 
+    public function getCategory($slug)
     {
         $category = Category::where('slug', $slug)->get();
         $id = Category::where('slug', $slug)->pluck('id');
@@ -222,7 +223,7 @@ class PageController extends Controller
     	return view('page.danhmuc', compact('sp_danhmuc', 'sp_khac', 'category'));
     }
 
-    public function getProductType($slug) 
+    public function getProductType($slug)
     {
         $id = ProductType::where('slug', $slug)->pluck('id');
         $sp_theoloai = Product::where('id_type', $id)->paginate(9,['*'],'pag1') ;
@@ -233,7 +234,7 @@ class PageController extends Controller
     	return view('page.loai_sp', compact('sp_theoloai', 'sp_khac', 'cate', 'loai_mau'));
     }
 
-    public function getProductDetails($slug) 
+    public function getProductDetails($slug)
     {
         $time = Carbon::now()->toDateString();
         $sanpham = Product::where('slug', $slug)->first();
@@ -246,16 +247,16 @@ class PageController extends Controller
         $type = ProductType::where('id', $id_type)->first();
         $cate = Category::where('id', $type->id_category)->first();
         $sp_khac = Product::where('id', '<>', $id)->limit(5)->get()->reverse();
-            
-    	return view('page.chi_tiet_sp', compact('sanpham', 'sp_khac', 'sp_cungloai', 'type', 'cate', 'time'));
+        Comment::count()!=0 ? $last_comment_id=Comment::latest()->first()->id : $last_comment_id=0;
+    	return view('page.chi_tiet_sp', compact('sanpham', 'sp_khac', 'sp_cungloai', 'type', 'cate', 'time', 'last_comment_id'));
     }
 
-    public function getCheckout() 
+    public function getCheckout()
     {
         return view('page.dat_hang_buoc_1');
     }
 
-    public function postCheckout(OrderRequest $req) 
+    public function postCheckout(OrderRequest $req)
     {
         $cart = Session::get('cart');
 
@@ -267,7 +268,7 @@ class PageController extends Controller
         $customer->phone_number = $req->phone;
         $customer->note = $req->note;
         $customer->save();
-        
+
         $bill = new Bill;
         $bill->id_customer = $customer->id;
         $bill->date_order = date('Y-m-d');
@@ -284,7 +285,7 @@ class PageController extends Controller
             $billDetail->save();
         }
 
-        $data = array(  
+        $data = array(
             'bill' => $bill,
         );
 
@@ -310,7 +311,7 @@ class PageController extends Controller
         return view('page.dat_hang_buoc_3')->with('thongbao', 'Đặt hàng thành công');
     }
 
-    public function getSearch(Request $req) 
+    public function getSearch(Request $req)
     {
         $key = $req->key;
         $sanpham = Product::where('name', 'like', '%'.$req->key.'%')
@@ -321,56 +322,56 @@ class PageController extends Controller
         return view('page.tim_kiem', compact('sanpham', 'type1', 'key'));
     }
 
-    public function getAbout() 
+    public function getAbout()
     {
         $type1 = ProductType::all();
 
         return view('page.gioi_thieu', compact('type1'));
     }
 
-    public function getManual() 
+    public function getManual()
     {
         $type1 = ProductType::all();
 
         return view('page.huong_dan', compact('type1'));
     }
 
-    public function getBasicRole() 
+    public function getBasicRole()
     {
         $type1 = ProductType::all();
 
         return view('page.chinh_sach_chung', compact('type1'));
     }
 
-    public function getSecurity() 
+    public function getSecurity()
     {
         $type1 = ProductType::all();
 
         return view('page.chinh_sach_bao_mat', compact('type1'));
     }
 
-    public function getExchange() 
+    public function getExchange()
     {
         $type1 = ProductType::all();
 
         return view('page.chinh_sach_doi_tra', compact('type1'));
     }
 
-    public function getGuarantee() 
+    public function getGuarantee()
     {
         $type1 = ProductType::all();
 
         return view('page.chinh_sach_bao_hanh', compact('type1'));
     }
 
-    public function getInformationPayment() 
+    public function getInformationPayment()
     {
         $type1 = ProductType::all();
 
         return view('page.thong_tin_thanh_toan', compact('type1'));
     }
 
-    public function getShip() 
+    public function getShip()
     {
         $type1 = ProductType::all();
 

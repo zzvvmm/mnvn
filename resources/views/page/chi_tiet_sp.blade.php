@@ -168,7 +168,7 @@
                                                     <a href="{{ route('dang-nhap') }}"><font color="c1a300">Đăng nhập/đăng ký để bình luận</font></a>
                                                 @else
                                                 </div>
-                                                
+
                                                     <div class="panel-footer">
                                                         <form role="form">
                                                             <div class="form-group">
@@ -177,8 +177,9 @@
                                                                 <input type="hidden" id="current-name" name="current-name" value="{{Auth::user()->name}}">
                                                                 <input type="hidden" id="current-id" name="current-id" value="{{Auth::user()->id}}">
                                                                 <input type="hidden" id="product-id" name="product-id" value="{{ $sanpham->id }}">
+                                                                <input type="hidden" id="last_comment_id" name="last_comment_id" value="{{ $last_comment_id }}">
                                                                 <input type="hidden" id="time" name="time" value="{{ $time }}">
-                                                                <input class="form-control" id="comments" name="comments">
+                                                                <textarea class="form-control" rows="3" id="comments" name="comments"></textarea>
                                                             </div>
                                                             <button type="submit" id="submit-btn" name="submit-btn"
                                                                 class="btn btn-warning">Bình luận</button>
@@ -288,40 +289,45 @@
   firebase.initializeApp(firebaseConfig);
   var db = firebase.firestore();
   var fireBaseRef = new Firebase("https://my-project-1532669495787.firebaseio.com/");
+
   $("#submit-btn").bind("click", function() {
     event.preventDefault();
     var comment = $("#comments");
     var commentValue = $.trim(comment.val());
     var name = $('#current-name').val();
     var product_id = $('#product-id').val();
-    var time = $('#time').val();
+    var d = new Date();
+    var time = d.toLocaleString();
+    var comment_id = parseInt($('#last_comment_id').val()) + 1 ;
+    var current_id = $('#current-id').val();
+
     if (commentValue.length === 0) {
         alert('Vui lòng nhập bình luận!');
     } else {
-        var current_id = $('#current-id').val();
-
-        $.ajax({
-            type: 'post',
-
-            url: "{{ route('comments.store') }}",
-            data: {
-                "_token": $('#token').val(),
-                'current_id': current_id,
-                'commentValue': commentValue,
-                'product_id': product_id,
-            },
-            success: function(data) {
-                $('.commentlist').append(data['success']);
-            },
-            error(data) {
-                console.log(data);
-            }
-        });
-
-
-        fireBaseRef.push({comment: commentValue, name: name, product_id: product_id, time: time}, function(error) {
+        fireBaseRef.child(comment_id).set({id: comment_id, comment: commentValue, name: name, product_id: product_id, time: time, user_id: current_id}, function(error) {
             if (error !== null) {
-                alert('Unable to push comments to Firebase!');
+                alert('Không thể kết nối đến Firebase Server. Vui lòng kiểm tra kết nối mạng!');
+            } else {
+
+                $('#last_comment_id').val(comment_id);
+                $.ajax({
+                    type: 'post',
+
+                    url: "{{ route('comments.store') }}",
+                    data: {
+                        "_token": $('#token').val(),
+                        'current_id': current_id,
+                        'commentValue': commentValue,
+                        'product_id': product_id,
+                        'comment_id': comment_id
+                    },
+                    success: function(data) {
+                        // $('.commentlist').append(data['success']);
+                    },
+                    error(data) {
+                        console.log(data);
+                    }
+                });
             }
         });
         comment.val("");
@@ -333,14 +339,78 @@
     var comment = snapshot.val()["comment"];
     var commentsContainer = $('#comments-container');
     var name = snapshot.val()["name"];
+    var user_id = snapshot.val()["user_id"];
     var time = snapshot.val()["time"];
     var product_id = $('#product-id').val();
+    var comment_id = parseInt($('#last_comment_id').val()) + 1 ;
+
+    var key = snapshot.val()["id"];
     if (snapshot.val()["product_id"]==product_id){
-        $('<div/>', {class: 'comment-container'})
-            .html('<i style="color:#c1a300">' + time +'</i>' + '<b>&nbsp&nbsp'+ name + '</b><br>' + comment + '<hr>')
-            .appendTo(commentsContainer);
+        var html = '<i style="color:#c1a300">' + time +'</i>' + '<b>&nbsp&nbsp'+ name;
+            if (user_id=={{\Auth::user()->id}} || {{\Auth::user()->id }}==1){
+                html += '<a href="#"  id="'+key+'" class="delete" style="float:right; color:red;">Xoá</a>';
+            }
+            html += '</b><br><p style="white-space: pre-wrap;">'+comment;
+            html += '</p><hr>';
+        $('<div/>', {class: 'comment-container', id: 'comment-container'+key}).html(html).appendTo(commentsContainer);
+
+        // $('<div/>', {class: 'comment-container', id: 'comment-container'+key})
+        //     .html('<i style="color:#c1a300">' + time +'</i>' + '<b>&nbsp&nbsp'+ name + '</b><a href="#" type="button" id="'+key
+        //     +'" class="btn btn-danger delete">Delete</a><br><p style="white-space: pre-wrap;">'
+        //     +'" class="btn btn-danger edit">Edit</a><br><p style="white-space: pre-wrap;">' + comment + '</p><hr>')
+            // .appendTo(commentsContainer);
         commentsContainer.scrollTop(commentsContainer.prop('scrollHeight'));
     }
+    function writeNewPost(uid, username, picture, title, body) {
+     // A post entry.
+    var postData = {
+        author: username,
+        uid: uid,
+        body: body,
+        title: title,
+        starCount: 0,
+        authorPic: picture
+    };
+
+    // Get a key for a new Post.
+    var newPostKey = firebase.database().ref().child('posts').push().key;
+
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+    updates['/posts/' + newPostKey] = postData;
+    updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+    return firebase.database().ref().update(updates);
+    }
+    $(".delete").click(function(event) {
+
+        var id = $(this).attr("id");
+        fireBaseRef.child(id).remove(function(error){
+            if (error !== null) {
+                alert('Không thể kết nối đến Firebase Server. Vui lòng kiểm tra kết nối mạng!');
+            } else {
+                $("#comment-container"+id).remove();
+                var user_id = snapshot.val()["user_id"];
+                $.ajax({
+                    type: 'post',
+
+                    url: "{{ route('comments.delete') }}",
+                    data: {
+                        "_token": $('#token').val(),
+                        'user_id': user_id,
+                        'comment_id': id
+                    },
+                    success: function(data) {
+                        if (data['success']!="") { alert(data['success']); };
+                    },
+                    error(data) {
+                        console.log(data);
+                    }
+                });
+            }
+        });
+        return(false);
+    });
 });
 
 </script>
