@@ -19,7 +19,7 @@
             <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                 <div class="right-all-product">
                     <!-- PRODUCT-CATEGORY-HEADER START -->
-                    <div class="product-category-header">
+                    {{-- <div class="product-category-header">
                         <div class="category-header-image">
                         <img src="source/img/product/{{ $cate->avatar }}"  width="852px" height="420px" alt="category-header"/>
                             <div class="category-header-text">
@@ -29,7 +29,7 @@
                                 <h3 style="color:white">{{ $cate->desciption }}</h3>
                             </div>									
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- PRODUCT-CATEGORY-HEADER END -->
                     <div class="product-category-title">
                         <!-- PRODUCT-CATEGORY-TITLE START -->
@@ -47,7 +47,7 @@
                         <ul class="gategory-product">
                             @foreach($sp_danhmuc as $sp)
                             <!-- SINGLE ITEM START -->
-                                <li class="gategory-product-list col-lg-３ col-md-4 col-sm-6 col-xs-12">
+                                <li class="gategory-product-list col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     <div class="single-product-item">
                                         <div class="product-image">
                                         <a href="{{ route('chi-tiet-san-pham', $sp->slug) }}"><img src="source/img/product/{{ $sp->getImage($sp->id)->name }}" alt="product-image" /></a>

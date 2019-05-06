@@ -18,6 +18,7 @@ use App\BillDetail;
 use Session;
 use Hash;
 use Auth;
+use Carbon\Carbon;
 
 class PageController extends Controller
 {
@@ -193,7 +194,8 @@ class PageController extends Controller
         return redirect()->back();
     }
 
-    public function getDeleteOneItemCart($id) {
+    public function getDeleteOneItemCart($id) 
+    {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->reduceByOne($id);
@@ -214,7 +216,7 @@ class PageController extends Controller
         $type_khac = ProductType::where('id_category', '<>', $id)->get();
         $id_type_khac = ProductType::where('id_category', '<>', $id)->pluck('id');
         $id_type = ProductType::where('id_category', $id)->pluck('id');
-        $sp_danhmuc = Product::whereIn('id_type', $id_type )->paginate(18,['*'],'pag1');
+        $sp_danhmuc = Product::whereIn('id_type', $id_type )->paginate(9,['*'],'pag1');
         $sp_khac = Product::whereIn('id_type', $id_type_khac)->limit(10)->get()->reverse();
 
     	return view('page.danhmuc', compact('sp_danhmuc', 'sp_khac', 'category'));
@@ -223,7 +225,7 @@ class PageController extends Controller
     public function getProductType($slug) 
     {
         $id = ProductType::where('slug', $slug)->pluck('id');
-        $sp_theoloai = Product::where('id_type', $id)->paginate(18,['*'],'pag1') ;
+        $sp_theoloai = Product::where('id_type', $id)->paginate(9,['*'],'pag1') ;
         $sp_khac = Product::where('id_type', '<>', $id)->limit(8)->get();
         $loai_mau = ProductType::where('id', $id)->first();
         $cate = Category::where('id', $loai_mau->id_category)->first();
@@ -233,6 +235,7 @@ class PageController extends Controller
 
     public function getProductDetails($slug) 
     {
+        $time = Carbon::now()->toDateString();
         $sanpham = Product::where('slug', $slug)->first();
         $id = Product::where('slug', $slug)->pluck('id');
         $id_type = $sanpham->id_type;
@@ -244,7 +247,7 @@ class PageController extends Controller
         $cate = Category::where('id', $type->id_category)->first();
         $sp_khac = Product::where('id', '<>', $id)->limit(5)->get()->reverse();
             
-    	return view('page.chi_tiet_sp', compact('sanpham', 'sp_khac', 'sp_cungloai', 'type', 'cate'));
+    	return view('page.chi_tiet_sp', compact('sanpham', 'sp_khac', 'sp_cungloai', 'type', 'cate', 'time'));
     }
 
     public function getCheckout() 

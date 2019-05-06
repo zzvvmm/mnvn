@@ -1,4 +1,4 @@
-<section class="company-facality">
+{{-- <section class="company-facality">
     <div class="container">
         <div class="row">
             <div class="company-facality-row">
@@ -53,7 +53,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 <section class="footer-top-area">
     <div class="container">
         <div class="footer-top-container">

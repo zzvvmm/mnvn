@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Comment;
 use App\Product;
+
 class CommentController extends Controller
 {
     public function store(Request $request)
@@ -15,6 +16,8 @@ class CommentController extends Controller
       $comment->user()->associate($request->user());
       $product = Product::find($request->get('product_id'));
       $product->comments()->save($comment);
+      
       return response()->json(['success'=>$product]);
     }
 }
+

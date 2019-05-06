@@ -90,7 +90,7 @@
                                 </b>
                             </div>
                                 {{-- <a href="{{ route('dat-hang')}}" class="btn btn-danger" role="button">Mua ngay</a> --}}
-                                <a href="{{ route('them-gio-hang', $sanpham->id) }}" class="btn btn-warning" role="button">Thêm vào giỏ hàng</a>
+                                <a href="{{ route('them-gio-hang', $sanpham->id) }}" class="btn btn-danger" role="button">Thêm vào giỏ hàng</a>
 								<div class="clearfix"></div>
                         </div>
                     </div>
@@ -160,49 +160,33 @@
                                         </div>
                                         <div class="col-xs-7 col-sm-8 col-md-8 col-lg-9 padding-5">
                                         <div class="write-your-review">
-
                                         <p>Nhận xét từ khách hàng</p>
-
-                                        <div class="panel panel-default">
-
-                                            <div class="panel-body">
-
-                                                <div id="comments-container"></div>
-
-                                            </div>
-                                            @if(!Auth::check())
-                                                <a href="{{ route('dang-nhap') }}"><font color="c1a300">Đăng nhập/đăng ký để bình luận</font></a>
-                                            @else
-                                                <div class="panel-footer">
-
-                                                    <form role="form">
-
-                                                        <div class="form-group">
-
-                                                            <label for="comments">Nhập bình luận của bạn</label>
-                                                            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-
-                                                            <input type="hidden" id="current-name" name="current-name" value="{{Auth::user()->name}}">
-                                                            <input type="hidden" id="current-id" name="current-id" value="{{Auth::user()->id}}">
-                                                            <input type="hidden" id="product-id" name="product-id" value="{{ $sanpham->id }}">
-                                                            <input class="form-control" id="comments" name="comments">
-
-                                                        </div>
-
-                                                        <button type="submit" id="submit-btn" name="submit-btn"
-
-                                                            class="btn btn-success">Bình luận</button>
-
-                                                        <button type="reset" class="btn btn-danger">Xoá bình luận</button>
-
-                                                    </form>
-
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div id="comments-container"></div>
+                                                    @if(!Auth::check())
+                                                    <a href="{{ route('dang-nhap') }}"><font color="c1a300">Đăng nhập/đăng ký để bình luận</font></a>
+                                                @else
                                                 </div>
-                                            @endif
-
-                                        </div>
-
-
+                                                
+                                                    <div class="panel-footer">
+                                                        <form role="form">
+                                                            <div class="form-group">
+                                                                <label for="comments">Nhập bình luận của bạn</label>
+                                                                <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                                                                <input type="hidden" id="current-name" name="current-name" value="{{Auth::user()->name}}">
+                                                                <input type="hidden" id="current-id" name="current-id" value="{{Auth::user()->id}}">
+                                                                <input type="hidden" id="product-id" name="product-id" value="{{ $sanpham->id }}">
+                                                                <input type="hidden" id="time" name="time" value="{{ $time }}">
+                                                                <input class="form-control" id="comments" name="comments">
+                                                            </div>
+                                                            <button type="submit" id="submit-btn" name="submit-btn"
+                                                                class="btn btn-warning">Bình luận</button>
+                                                            {{-- <button type="reset" class="btn btn-danger">Xoá bình luận</button> --}}
+                                                        </form>
+                                                    </div>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -260,12 +244,10 @@
                                         </div>
                                     @endforeach
                                 </div>
-                                <!-- RELATED-CAROUSEL END -->
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- RELATED-PRODUCTS-AREA END -->
             </div>
         </div>
     </div>
@@ -312,6 +294,7 @@
     var commentValue = $.trim(comment.val());
     var name = $('#current-name').val();
     var product_id = $('#product-id').val();
+    var time = $('#time').val();
     if (commentValue.length === 0) {
         alert('Vui lòng nhập bình luận!');
     } else {
@@ -336,7 +319,7 @@
         });
 
 
-        fireBaseRef.push({comment: commentValue, name: name, product_id: product_id}, function(error) {
+        fireBaseRef.push({comment: commentValue, name: name, product_id: product_id, time: time}, function(error) {
             if (error !== null) {
                 alert('Unable to push comments to Firebase!');
             }
@@ -350,15 +333,15 @@
     var comment = snapshot.val()["comment"];
     var commentsContainer = $('#comments-container');
     var name = snapshot.val()["name"];
+    var time = snapshot.val()["time"];
     var product_id = $('#product-id').val();
     if (snapshot.val()["product_id"]==product_id){
         $('<div/>', {class: 'comment-container'})
-            .html('<span class="label label-info">'+name + '</span> ' + comment)
+            .html('<i style="color:#c1a300">' + time +'</i>' + '<b>&nbsp&nbsp'+ name + '</b><br>' + comment + '<hr>')
             .appendTo(commentsContainer);
         commentsContainer.scrollTop(commentsContainer.prop('scrollHeight'));
     }
 });
-
 
 </script>
 @endsection
